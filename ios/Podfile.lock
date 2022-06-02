@@ -1,0 +1,91 @@
+PODS:
+  - device_info (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_inappwebview (0.0.1):
+    - Flutter
+    - flutter_inappwebview/Core (= 0.0.1)
+    - OrderedSet (~> 5.0)
+  - flutter_inappwebview/Core (0.0.1):
+    - Flutter
+    - OrderedSet (~> 5.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
+  - myfatoorah_flutter (0.0.1):
+    - Flutter
+  - OrderedSet (5.0.0)
+  - package_info (0.0.1):
+    - Flutter
+  - package_info_plus (0.4.5):
+    - Flutter
+  - path_provider_ios (0.0.1):
+    - Flutter
+  - share (0.0.1):
+    - Flutter
+  - Toast (4.0.0)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - device_info (from `.symlinks/plugins/device_info/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - myfatoorah_flutter (from `.symlinks/plugins/myfatoorah_flutter/ios`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - share (from `.symlinks/plugins/share/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
+
+SPEC REPOS:
+  trunk:
+    - OrderedSet
+    - Toast
+
+EXTERNAL SOURCES:
+  device_info:
+    :path: ".symlinks/plugins/device_info/ios"
+  Flutter:
+    :path: Flutter
+  flutter_inappwebview:
+    :path: ".symlinks/plugins/flutter_inappwebview/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  myfatoorah_flutter:
+    :path: ".symlinks/plugins/myfatoorah_flutter/ios"
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  path_provider_ios:
+    :path: ".symlinks/plugins/path_provider_ios/ios"
+  share:
+    :path: ".symlinks/plugins/share/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
+
+SPEC CHECKSUMS:
+  device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
+  fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
+  myfatoorah_flutter: 7db54f4e59b70038704a174c3511718e0d1746b1
+  OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  share: 0b2c3e82132f5888bccca3351c504d0003b3b410
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
+  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
+
+PODFILE CHECKSUM: 4ea0b88a7e2511a26c6d4d5589996dab2cb094e9
+
+COCOAPODS: 1.11.3
