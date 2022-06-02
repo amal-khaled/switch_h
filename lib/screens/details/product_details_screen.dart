@@ -109,7 +109,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-        ToastContext().init(context);
+    ToastContext().init(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -216,9 +216,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       builder: (context) => Cart()));
                             });
                           } else {
-                            Toast.show(
-                                AppLocalizations.of(context)
-                                    .translate("addProductCount"));
+                            Toast.show(AppLocalizations.of(context)
+                                .translate("addProductCount"));
                           }
                           // }
                         }
@@ -641,8 +640,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         "size": "",
         "type": "2"
       };
-
-      var response = await http.post(Uri.parse(apiUrlTest), body: body);
+      Map<String, String> headers = {
+        "Content-lang": Boxes.getUserDataBox().get("userLang"),
+      };
+      var response =
+          await http.post(Uri.parse(apiUrlTest), body: body, headers: headers);
       var data = jsonDecode(response.body);
       print(data);
       print(productId);

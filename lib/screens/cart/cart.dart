@@ -23,7 +23,7 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
-        ToastContext().init(context);
+    ToastContext().init(context);
 
     return Scaffold(
       bottomNavigationBar: Material(
@@ -471,8 +471,11 @@ class _CartState extends State<Cart> {
         "size": "",
         "type": "2"
       };
-
-      var response = await http.post(Uri.parse(apiUrlTest), body: body);
+      Map<String, String> headers = {
+        "Content-lang": Boxes.getUserDataBox().get("userLang"),
+      };
+      var response =
+          await http.post(Uri.parse(apiUrlTest), body: body, headers: headers);
       var data = jsonDecode(response.body);
       print(data);
       print(productId);

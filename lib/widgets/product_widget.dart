@@ -281,8 +281,11 @@ class _ProductWidgetState extends State<ProductWidget> {
         "size": "",
         "type": "2"
       };
-
-      var response = await http.post(Uri.parse(apiUrlTest), body: body);
+      Map<String, String> headers = {
+        "Content-lang": Boxes.getUserDataBox().get("userLang"),
+      };
+      var response =
+          await http.post(Uri.parse(apiUrlTest), body: body, headers: headers);
       var data = jsonDecode(response.body);
       print(data);
       print(productId);
