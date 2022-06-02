@@ -688,11 +688,9 @@ class _PaymentPageState extends State<PaymentPage> {
                           }
                           if (selectedPaymentMethodID == 0) {
                             if (net > 0) {
-                              setOrders(0, "");
                               checkOrders(executeRegularPayment, "");
                             } else {
                               checkOrders(executeRegularPayment, "balance");
-                              setOrders(0, "balance");
                             }
                           }
                         },
