@@ -152,16 +152,13 @@ class VisaState extends State<Visa> {
             }
           }
         } else {
-          Toast.show(
-              AppLocalizations.of(context).translate("noInternet"));
+          Toast.show(AppLocalizations.of(context).translate("noInternet"));
         }
       } on SocketException {
-        Toast.show(
-            AppLocalizations.of(context).translate("noInternet"));
+        Toast.show(AppLocalizations.of(context).translate("noInternet"));
       }
     } else {
-      Toast.show(
-          AppLocalizations.of(context).translate("reOpenTheApp"));
+      Toast.show(AppLocalizations.of(context).translate("reOpenTheApp"));
     }
     if (this.mounted) {
       setState(() {
@@ -173,14 +170,14 @@ class VisaState extends State<Visa> {
   @override
   void initState() {
     // MFSDK.init(baseUrl, mAPIKey);
-        MFSDK.init(mApiKeyTest, MFCountry.KUWAIT, MFEnvironment.TEST);
+    MFSDK.init(mAPIKey, MFCountry.KUWAIT, MFEnvironment.LIVE);
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-        ToastContext().init(context);
+    ToastContext().init(context);
 
     double width = MediaQuery.of(context).size.width;
     return MaterialApp(
@@ -245,9 +242,8 @@ class VisaState extends State<Visa> {
                           print(date);
                           print(cardHolderName);
                           print("cardHolderName");
-                          Toast.show(
-                              AppLocalizations.of(context)
-                                  .translate("completeTheData"));
+                          Toast.show(AppLocalizations.of(context)
+                              .translate("completeTheData"));
                         } else {
                           setState(() {
                             _load = true;

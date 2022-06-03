@@ -272,8 +272,8 @@ class _ProductWidgetState extends State<ProductWidget> {
   }
 
   checkProductQuantity({int productId}) async {
-    final String apiUrlTest =
-        "https://rayan.openshoop.com/api/v1/check-product";
+    final String apiUrlTest = APIUrl + "check-product";
+    // "https://rayan.openshoop.com/api/v1/check-product";
     try {
       Map<String, dynamic> body = {
         "product_id": productId.toString(),

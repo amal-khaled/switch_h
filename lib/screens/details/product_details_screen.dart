@@ -631,8 +631,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   bool isAvailable = false;
   int quantity = 0;
   checkProductQuantity({int productId}) async {
-    final String apiUrlTest =
-        "https://rayan.openshoop.com/api/v1/check-product";
+    final String apiUrlTest = APIUrl + "check-product";
+    // "https://rayan.openshoop.com/api/v1/check-product";
     try {
       Map<String, dynamic> body = {
         "product_id": productId.toString(),

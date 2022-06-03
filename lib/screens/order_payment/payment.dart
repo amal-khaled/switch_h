@@ -353,7 +353,7 @@ class _PaymentPageState extends State<PaymentPage> {
     }
 
     // MFSDK.init(urlTest, mApiKeyTest);
-    MFSDK.init(mApiKeyTest, MFCountry.KUWAIT, MFEnvironment.TEST);
+    MFSDK.init(mAPIKey, MFCountry.KUWAIT, MFEnvironment.LIVE);
     initiatePayment();
 
     getNet();
