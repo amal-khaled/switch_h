@@ -215,7 +215,7 @@ class _PaymentPageState extends State<PaymentPage> {
           );
         }
         final result = await InternetAddress.lookup('google.com');
-
+        print(productsOptions);
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           Map<String, dynamic> body = {
             "phone": widget.phone,
@@ -244,12 +244,12 @@ class _PaymentPageState extends State<PaymentPage> {
             "products": jsonEncode(productsOptions),
           };
           final String apiUrl = APIUrl + "add_orders";
-          final String apiUrlTest =
-              "https://rayan.openshoop.com/api/v1/add_orders";
+          final String apiUrlTest = APIUrl + "add_orders";
           http.Response response = await http.post(Uri.parse(apiUrlTest),
               headers: {"Accept": "application/json"}, body: body);
 
           print(productsOptions);
+          print(body);
           print(apiUrl);
           if (response.statusCode == 200) {
             print("---------------------------------------------------");
