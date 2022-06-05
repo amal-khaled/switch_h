@@ -172,6 +172,7 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
   getDeliveryDates() async {
     setState(() {
       isDatesLoading = true;
+      dates = [];
     });
     //  List<String> elements=[];
     try {
@@ -403,7 +404,7 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
 
   @override
   Widget build(BuildContext context) {
-        ToastContext().init(context);
+    ToastContext().init(context);
 
     return Container(
       color: scaffoldBgColor,
