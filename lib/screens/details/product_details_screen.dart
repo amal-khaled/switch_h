@@ -642,6 +642,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       };
       Map<String, String> headers = {
         "Content-lang": Boxes.getUserDataBox().get("userLang"),
+        "is_new": "1"
       };
       var response =
           await http.post(Uri.parse(apiUrlTest), body: body, headers: headers);

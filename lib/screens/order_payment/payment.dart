@@ -246,7 +246,8 @@ class _PaymentPageState extends State<PaymentPage> {
           final String apiUrl = APIUrl + "add_orders";
           final String apiUrlTest = APIUrl + "add_orders";
           http.Response response = await http.post(Uri.parse(apiUrlTest),
-              headers: {"Accept": "application/json"}, body: body);
+              headers: {"Accept": "application/json", "is_new": "1"},
+              body: body);
 
           print(productsOptions);
           print(body);

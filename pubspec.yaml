@@ -33,8 +33,10 @@ dependencies:
   share: any
   package_info: any
   font_awesome_flutter: any
-  contactus: any
+  contactus: ^1.0.9
+  # in_app_update: ^1.1.15
   new_version: any
+  # forceupdate: any
   scrollable_list_tabview: any
   flutter_slidable: any
   flutter_credit_card: any

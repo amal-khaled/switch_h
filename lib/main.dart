@@ -19,6 +19,7 @@ import 'package:sweet/screens/home_screen/slider_listview.dart';
 import 'package:sweet/screens/orders/orders.dart';
 import 'package:sweet/screens/settings/add_user_delivery_details.dart';
 import 'package:sweet/screens/splash/splashScreen.dart';
+import 'package:sweet/screens/test.dart';
 import 'constants.dart';
 import 'custom_animation.dart';
 import 'local_data/boxes.dart';
