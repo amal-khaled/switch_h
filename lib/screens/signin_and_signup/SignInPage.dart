@@ -61,7 +61,8 @@ class _SignInPageState extends State<SignInPage> {
           });
         }
         final response = await http.post(Uri.parse(APIUrl + "login"), headers: {
-          "Accept": "application/json"
+          "Accept": "application/json",
+          "is_new": "1"
         }, body: {
           "phone": _phoneControl.text,
           "password": _passwordControl.text,
@@ -128,7 +129,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-        ToastContext().init(context);
+    ToastContext().init(context);
 
     return SafeArea(
       child: Scaffold(

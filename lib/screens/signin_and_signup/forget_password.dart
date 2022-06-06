@@ -50,7 +50,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             });
           }
           final response = await http.post(Uri.parse(APIUrl + "send_code"),
-              headers: {"Accept": "application/json"},
+              headers: {"Accept": "application/json", "is_new": "1"},
               body: {"phone": _phoneControl.text, "token": tok.toString()});
 
           //var prif = SharedPreferences.getInstance();
@@ -106,7 +106,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-        ToastContext().init(context);
+    ToastContext().init(context);
 
     double width = MediaQuery.of(context).size.width;
     return Scaffold(

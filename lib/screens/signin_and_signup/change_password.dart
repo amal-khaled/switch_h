@@ -59,7 +59,8 @@ class _ChangePasswordState extends State<ChangePassword> {
           }
           final response =
               await http.post(Uri.parse(APIUrl + "changPassword"), headers: {
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "is_new": "1"
           }, body: {
             "code": _codeControl.text,
             "password": _passwordControl.text,
@@ -115,7 +116,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
-        ToastContext().init(context);
+    ToastContext().init(context);
 
     double width = MediaQuery.of(context).size.width;
     return Scaffold(

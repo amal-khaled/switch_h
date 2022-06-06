@@ -83,7 +83,8 @@ class _SignUpPageState extends State<SignUpPage> {
           }
           final response =
               await http.post(Uri.parse(APIUrl + "register"), headers: {
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "is_new": "1"
           }, body: {
             "phone": _phoneControl.text,
             "password": _passwordControl.text,
