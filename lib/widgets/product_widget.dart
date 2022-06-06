@@ -283,6 +283,7 @@ class _ProductWidgetState extends State<ProductWidget> {
       };
       Map<String, String> headers = {
         "Content-lang": Boxes.getUserDataBox().get("userLang"),
+        "is_new": "1"
       };
       var response =
           await http.post(Uri.parse(apiUrlTest), body: body, headers: headers);

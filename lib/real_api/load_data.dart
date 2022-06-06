@@ -10,7 +10,6 @@ class LoadData {
   LoadData(BuildContext context) {
     this.context = context;
     ToastContext().init(context);
-
   }
   //HomeApi api = new HomeApi() ;
   bool _error = false;
@@ -23,13 +22,13 @@ class LoadData {
     try {
       //get http
       if (call == null || call == "get") {
-        response =
-            await http.get(Uri.parse(link), headers: {"Accept": "application/json"});
+        response = await http.get(Uri.parse(link),
+            headers: {"Accept": "application/json", "is_new": "1"});
 
 //post http
       } else {
         response = await http.post(Uri.parse(link),
-            headers: {"Accept": "application/json"}, body: args);
+            headers: {"Accept": "application/json", "is_new": "1"}, body: args);
       }
 
       if (response.statusCode == 200) {
