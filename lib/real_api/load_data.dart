@@ -11,7 +11,7 @@ class LoadData {
     this.context = context;
     ToastContext().init(context);
   }
-  //HomeApi api = new HomeApi() ;
+
   bool _error = false;
   bool get error => _error;
   var data;
