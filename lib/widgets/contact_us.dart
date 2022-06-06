@@ -8,6 +8,7 @@ class ContactSweet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       bottomNavigationBar: ContactUsBottomAppBar(
         companyName: "Bluzone",
         textColor: brandColor,
