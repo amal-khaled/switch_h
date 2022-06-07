@@ -94,13 +94,40 @@ class VisaState extends State<Visa> {
       _load = true;
     });
     final tok = Boxes.getUserDataBox().get("userToken");
+    final box = Boxes.getLocalCartItemsBox();
+    int boxQTY = box.values.length;
     if (tok != null) {
       try {
+        var productsOptions = [];
+        for (int i = 0; i < boxQTY; i++) {
+          productsOptions.add(
+            {
+              "attr": [
+                {
+                  "id": box.keyAt(i).toString(),
+                },
+                {
+                  "qut": box.getAt(i).toString(),
+                },
+                {
+                  "color": "",
+                },
+                {
+                  "size": "",
+                },
+                {
+                  "type": 2.toString(),
+                },
+              ],
+            },
+          );
+        }
         final result = await InternetAddress.lookup('google.com');
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           http.Response response =
               await http.post(Uri.parse(APIUrl + "add_orders"), headers: {
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "is_new": "1"
           }, body: {
             "phone": widget.phone,
             "type": type.toString(),
@@ -122,6 +149,7 @@ class VisaState extends State<Visa> {
             "total": double.parse(Boxes.getUserDataBox().get("totalInCart"))
                 .toString(),
             "balance": (widget.balance).toString(),
+            "products": jsonEncode(productsOptions),
           });
 
           if (response.statusCode == 200) {

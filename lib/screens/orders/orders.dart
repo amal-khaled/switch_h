@@ -62,7 +62,8 @@ class _OrderState extends State<Order> {
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           http.Response response =
               await http.post(Uri.parse(APIUrl + "my_orders"), headers: {
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "is_new": "1"
           }, body: {
             "token": tok,
             "user_id": Boxes.getUserDataBox().get("userJsonData") == null
@@ -131,7 +132,7 @@ class _OrderState extends State<Order> {
 
   @override
   Widget build(BuildContext context) {
-        ToastContext().init(context);
+    ToastContext().init(context);
 
     return Scaffold(
         backgroundColor: Colors.grey[300],
