@@ -20,6 +20,7 @@ import 'package:sweet/screens/orders/orders.dart';
 import 'package:sweet/screens/settings/add_user_delivery_details.dart';
 import 'package:sweet/screens/splash/splashScreen.dart';
 import 'package:sweet/screens/test.dart';
+import 'package:upgrader/upgrader.dart';
 import 'constants.dart';
 import 'custom_animation.dart';
 import 'local_data/boxes.dart';
@@ -494,14 +495,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         onPressed: () => Scaffold.of(context).openDrawer())),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                    width: 100.w, height: 28.h, child: HomeSliderListView()),
-                BrandsInHList(),
-                HomeScreenCategories(),
-              ],
+          body: UpgradeAlert(
+          upgrader: Upgrader(
+              dialogStyle: UpgradeDialogStyle.cupertino,
+              onIgnore: () {
+                return false;
+              },
+              onLater: () {
+                                return false;
+
+              }),
+          child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                      width: 100.w, height: 28.h, child: HomeSliderListView()),
+                  BrandsInHList(),
+                  HomeScreenCategories(),
+                ],
+              ),
             ),
           ),
         ),
