@@ -163,9 +163,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   ? Icon(
                                       Icons.add_circle,
                                       color: brandColor,
-                                      size: 23.sp,
+                                      size: 33.sp,
                                     )
                                   : ClipOval(
+                                    
                                       child: Container(
                                         color: brandColor,
                                         child: Center(
@@ -295,11 +296,12 @@ class _ProductWidgetState extends State<ProductWidget> {
             '${data['msg']}', context);
         // AppLocalizations.of(context).translate("soldOut")
       } else {
+        //   setState(() {
+        //   count++;
+        // });
         await HiveMethods.addProductToLocalCartItemObject(
             context, widget.product, 1);
-        setState(() {
-          count++;
-        });
+      
         // if (count == int.parse(data['data'])) {
         //   setState(() {
         //     count = count;

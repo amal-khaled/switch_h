@@ -39,6 +39,7 @@ class _OrderDetailsState extends State<OrderDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
           shape: shapeForAppBars(),
           iconTheme: IconThemeData(color: brandColor),

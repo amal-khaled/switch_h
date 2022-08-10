@@ -135,7 +135,7 @@ class _OrderState extends State<Order> {
     ToastContext().init(context);
 
     return Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Colors.white,
         appBar: AppBar(
           shape: shapeForAppBars(),
           iconTheme: IconThemeData(color: brandColor),

@@ -75,20 +75,20 @@ class HomeSliderListView extends StatelessWidget {
             Container(
               height: 28.h,
               width: 100.w,
-              color: Colors.black.withOpacity(0.35),
+              // color: Colors.black.withOpacity(0.35),
               child: Padding(
                 padding: EdgeInsets.all(15.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      offersList[i].offerText,
-                      style: TextStyle(
-                          fontFamily: usedFont,
-                          fontSize: 13.sp,
-                          color: Colors.white),
-                    ),
+                    // Text(
+                    //   offersList[i].offerText,
+                    //   style: TextStyle(
+                    //       fontFamily: usedFont,
+                    //       fontSize: 13.sp,
+                    //       color: Colors.black),
+                    // ),
                     /*SizedBox(height: 10.0),
                     Container(
                       width: 170.0,

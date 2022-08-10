@@ -17,15 +17,16 @@ class BrandsGridView extends StatelessWidget {
     //List<Brand> visibleWidgets=brandsList.where((widget) => widget.brandTitle == "JBS").toList();
     final List<BrandsLive> brandsList=Provider.of<HomeProvider>(context, listen: false).brandsList;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         shape: shapeForAppBars(),
         title: Text(
           AppLocalizations.of(context).translate("brands"),
-          style: TextStyle(fontFamily: usedFont,fontSize: 17.sp,color: brandColor),
+          style: TextStyle(fontFamily: usedFont,fontSize: 17.sp,color: titleColor),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: brandColor),
+        iconTheme: IconThemeData(color: titleColor),
         actions: <Widget>[
           CartIcon(key: ValueKey("CartIconKey")),
           SizedBox(width: fixPadding)

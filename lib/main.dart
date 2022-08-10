@@ -19,7 +19,7 @@ import 'package:sweet/screens/home_screen/slider_listview.dart';
 import 'package:sweet/screens/orders/orders.dart';
 import 'package:sweet/screens/settings/add_user_delivery_details.dart';
 import 'package:sweet/screens/splash/splashScreen.dart';
-import 'package:sweet/screens/test.dart';
+import 'package:sizer/sizer.dart';
 import 'package:upgrader/upgrader.dart';
 import 'constants.dart';
 import 'custom_animation.dart';
@@ -29,7 +29,6 @@ import 'widgets/contact_us.dart';
 import 'screens/settings/settings_screen.dart';
 import 'screens/signin_and_signup/SignInPage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:sizer/sizer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -231,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Scaffold(
           key: homeScaffoldKey,
-          backgroundColor: Colors.blueGrey[50],
+          backgroundColor: Colors.white,
           drawer: SafeArea(
             child: Drawer(
               // Add a ListView to the drawer. This ensures the user can scroll
@@ -496,21 +495,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () => Scaffold.of(context).openDrawer())),
           ),
           body: UpgradeAlert(
-          upgrader: Upgrader(
-              dialogStyle: UpgradeDialogStyle.cupertino,
-              onIgnore: () {
-                return false;
-              },
-              onLater: () {
-                                return false;
-
-              }),
-          child: SingleChildScrollView(
+            upgrader: Upgrader(
+                dialogStyle: UpgradeDialogStyle.cupertino,
+                onIgnore: () {
+                  return false;
+                },
+                onLater: () {
+                  return false;
+                }),
+            child: SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
                       width: 100.w, height: 28.h, child: HomeSliderListView()),
+                  SizedBox(height: 3.h),
                   BrandsInHList(),
+                  SizedBox(height: 3.h),
                   HomeScreenCategories(),
                 ],
               ),

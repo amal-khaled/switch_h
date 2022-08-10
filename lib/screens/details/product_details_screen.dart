@@ -11,6 +11,7 @@ import 'package:sweet/screens/cart/cart.dart';
 import 'package:sweet/screens/cart/cart_icon.dart';
 import 'package:sweet/providers/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sweet/screens/details/product_image.dart';
 import 'package:sweet/widgets/product_widget.dart';
 import 'package:toast/toast.dart';
 import 'package:sizer/sizer.dart';
@@ -118,9 +119,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         iconTheme: IconThemeData(color: brandColor),
         centerTitle: true,
         title: Text(
-          'Sweet H',
+          widget.product.productTitle,
           style: TextStyle(
-              fontFamily: usedFont, fontSize: 17.sp, color: brandColor),
+              fontFamily: usedFont, fontSize: 17.sp, color: titleColor),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -249,39 +250,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      /*  Flexible(
-                        flex: 0,
-                        child: InkWell(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 07.w,
-                                height: 3.5.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(40),
-                                  ),
-                                  border: Border.all(
-                                    width: 1,
-                                    color: brandColor,
-                                    style: BorderStyle.solid,
-                                  ),
-                                ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Icon(Icons.close),
-                                ),
-                              ),
-                            ],
-                          ),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),*/
-//column of image and description and title
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -295,28 +266,40 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   width: 8.w,
                                   child: Stack(
                                     children: <Widget>[
-                                      Carousel(
-                                        dotSize: 4.sp,
-                                        dotSpacing: 4.w,
-                                        dotColor: Colors.lightBlueAccent,
-                                        indicatorBgPadding: 4.sp,
-                                        dotBgColor: Colors.transparent,
-                                        borderRadius: true,
-                                        dotVerticalPadding: 5.0,
-                                        dotPosition: DotPosition.bottomRight,
-                                        images: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              image: DecorationImage(
-                                                image: NetworkImage(widget
-                                                    .product.productImageURL),
-                                                fit: BoxFit.contain,
-                                              ),
+                                      InkWell(
+                                        onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProductImageWidget(
+                                              productImage: widget
+                                                  .product.productImageURL,
                                             ),
-                                          )
-                                        ],
+                                          ),
+                                        ),
+                                        child: Carousel(
+                                          dotSize: 4.sp,
+                                          dotSpacing: 4.w,
+                                          dotColor: Colors.lightBlueAccent,
+                                          indicatorBgPadding: 4.sp,
+                                          dotBgColor: Colors.transparent,
+                                          borderRadius: true,
+                                          dotVerticalPadding: 5.0,
+                                          dotPosition: DotPosition.bottomRight,
+                                          images: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                image: DecorationImage(
+                                                  image: NetworkImage(widget
+                                                      .product.productImageURL),
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                       widget.product.productOriginalPrice ==
                                               widget.product.productPrice
@@ -358,13 +341,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ],
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 5.h,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               RichText(
-                                textAlign: TextAlign.start,
+                                textAlign: TextAlign.center,
                                 text: TextSpan(
                                   children: [
                                     /*       TextSpan(
@@ -400,62 +383,73 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       style: TextStyle(
                                           fontFamily: usedFont,
                                           fontSize: 16.sp,
-                                          color: Colors.black87),
+                                          color: titleColor),
                                     )
                                   ],
                                 ),
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  widget.product.productOriginalPrice ==
-                                          widget.product.productPrice
-                                      ? Container(
-                                          height: 0,
-                                        )
-                                      : RichText(
-                                          textAlign: TextAlign.start,
-                                          text: TextSpan(
-                                            text:
-                                                "${widget.product.productOriginalPrice.toStringAsFixed(2)} ${AppLocalizations.of(context).translate("kd")}",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle2
-                                                .copyWith(
-                                                    fontFamily: usedFont,
-                                                    color: Colors.red,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    decoration: TextDecoration
-                                                        .lineThrough),
-                                          ),
-                                        ),
-                                  RichText(
-                                    textAlign: TextAlign.start,
-                                    text: TextSpan(
-                                      text:
-                                          "${widget.product.productPrice.toStringAsFixed(2)} ${AppLocalizations.of(context).translate("kd")}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1
-                                          .copyWith(
-                                              fontFamily: usedFont,
-                                              color: brandColor,
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 14.sp),
+                            ],
+                          ),
+                          SizedBox(height: 5),
+                          Divider(),
+                          SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              widget.product.productOriginalPrice ==
+                                      widget.product.productPrice
+                                  ? Container(
+                                      height: 0,
+                                    )
+                                  : RichText(
+                                      textAlign: TextAlign.start,
+                                      text: TextSpan(
+                                        text:
+                                            "${widget.product.productOriginalPrice.toStringAsFixed(2)} ${AppLocalizations.of(context).translate("kd")}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle2
+                                            .copyWith(
+                                                fontFamily: usedFont,
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.normal,
+                                                decoration:
+                                                    TextDecoration.lineThrough),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                              widget.product.productOriginalPrice ==
+                                      widget.product.productPrice
+                                  ? SizedBox(
+                                      width: 3.w,
+                                    )
+                                  : const SizedBox(),
+                              RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  text:
+                                      "${widget.product.productPrice.toStringAsFixed(2)} ${AppLocalizations.of(context).translate("kd")}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1
+                                      .copyWith(
+                                          fontFamily: usedFont,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14.sp),
+                                ),
                               ),
                             ],
                           ),
                           Divider(),
+                          SizedBox(height: 5),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
                                     height: 5,
@@ -521,28 +515,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                             ],
                           ),
+                          SizedBox(height: 5),
                           Divider(),
-                          RichText(
-                            textAlign: TextAlign.start,
-                            text: TextSpan(
-                              children: [
-                                /*TextSpan(
-                                    text:
-                                        "${AppLocalizations.of(context).translate("productDescription")}\n",
-                                    style: TextStyle(color: brandColor)),*/
-                                TextSpan(
-                                  text: AppLocalizations.of(context)
-                                      .translate("details"),
-                                  style: TextStyle(
-                                      fontFamily: usedFont,
-                                      fontSize: 13.sp,
-                                      color: Colors.black),
-                                )
-                              ],
+                          SizedBox(height: 5),
+                          Center(
+                            child: Text(
+                              AppLocalizations.of(context).translate("details"),
+                              style: TextStyle(
+                                  fontFamily: usedFont,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.sp,
+                                  color: titleColor),
+                              textAlign: TextAlign.center,
                             ),
                           ),
+                          Divider(),
+                          SizedBox(height: 5),
                           RichText(
-                            textAlign: TextAlign.start,
+                            textAlign: TextAlign.center,
                             text: TextSpan(
                               children: [
                                 /*TextSpan(
@@ -556,19 +546,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       widget.product.productEnglishDescription),
                                   style: TextStyle(
                                       fontFamily: usedFont,
+                                      fontWeight: FontWeight.w400,
                                       fontSize: 13.sp,
                                       color: Colors.black),
                                 )
                               ],
                             ),
                           ),
-                          SizedBox(height: 10),
-                          SizedBox(
-                            height: 10,
-                            child: Container(
-                              color: Colors.blueGrey[50],
-                            ),
-                          ),
+                          SizedBox(height: 5),
+                          Divider(),
+                          SizedBox(height: 5),
                         ],
                       ),
                       Container(
@@ -584,13 +571,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           .translate("similarProducts"),
                                       style: TextStyle(
                                           fontFamily: usedFont,
-                                          color: Colors.grey,
-                                          fontSize: 16),
-                                      textAlign: TextAlign.start,
+                                          color: titleColor,
+                                          fontSize: 16.sp),
+                                      textAlign: TextAlign.center,
                                     ))
                                 : SizedBox(
                                     height: 1,
                                   ),
+                            similarProducts.length != 0
+                                ? SizedBox(height: 10)
+                                : const SizedBox(),
+                            similarProducts.length != 0
+                                ? Divider()
+                                : const SizedBox(),
+                            similarProducts.length != 0
+                                ? SizedBox(height: 10)
+                                : const SizedBox(),
                             similarProducts.length != 0
                                 ? Container(
                                     height: 40.h,

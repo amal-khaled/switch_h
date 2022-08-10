@@ -32,15 +32,25 @@ class BrandsInHList extends StatelessWidget {
                   AppLocalizations.of(context).translate("brands"),
                   style: TextStyle(
                       fontFamily: usedFont,
-                      fontSize: 13.sp,
-                      color: brandColor),
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: titleColor),
                 ),
-                Text(
-                  AppLocalizations.of(context).translate("more"),
-                  style: TextStyle(
-                      fontFamily: usedFont,
-                      fontSize: 13.sp,
-                      color: Colors.black),
+                Container(
+                  width: 20.w,
+                  decoration: BoxDecoration(
+                    color: titleColor.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(2.w),
+                  ),
+                  child: Center(
+                    child: Text(
+                      AppLocalizations.of(context).translate("more"),
+                      style: TextStyle(
+                          fontFamily: usedFont,
+                          fontSize: 13.sp,
+                          color: Colors.white),
+                    ),
+                  ),
                 )
               ],
             ),
@@ -52,9 +62,8 @@ class BrandsInHList extends StatelessWidget {
               borderRadius: new BorderRadius.only(
                 bottomLeft: const Radius.circular(30.0),
                 bottomRight: const Radius.circular(30.0),
-              )
-          ),
-         // padding: EdgeInsets.all(10),
+              )),
+          // padding: EdgeInsets.all(10),
           height: 16.h,
 
           child: Center(

@@ -11,7 +11,7 @@
   "yourDeliveryInformation":"Your Delivery Information",
   "itemsCount":"items count: ",
   "kd":" KD",
-  "totalPrice":"Total: ",
+  "totalPrice":"Total ",
   "totalTotalPrice":"Total pay: ",
   "myOrders":"My Orders",
   "arabic":"Arabic",
@@ -170,6 +170,18 @@
   "enterYourPhone": "Enter Your Phone",
   "passwordLengthShouldBeBetween6and20": "Password Length Should BeBetween 6 and 20",
   "enterYourName": "Enter Your Name",
+  "high_price":"High price",
+  "high_discount":"High discount",
+  "low_price":"low price",
+  "sort":"Sort by",
+  "sub_total":"Subtotal",
+  "discount":"Discount",
+  "shipping":"Shipping",
+  "ship":"depend on city",
+  "copon":"Do you have coupon ? ",
+  "active":"Activate",
+  "cobon_hint":"enter coupon",
+
 
 
 

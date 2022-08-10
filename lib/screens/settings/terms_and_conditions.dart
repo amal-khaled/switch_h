@@ -11,6 +11,7 @@ class TermsAndConditions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         shape: shapeForAppBars(),
         iconTheme: IconThemeData(color: brandColor),

@@ -36,6 +36,7 @@ class _SpecificOfferProductsState extends State<SpecificOfferProducts> {
   Widget build(BuildContext context) {
     //List<Product> visibleWidgets=itemsList.where((widget) => widget.productBrand == brandTitle).toList();
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         shape: shapeForAppBars(),
         iconTheme: IconThemeData(color: brandColor),

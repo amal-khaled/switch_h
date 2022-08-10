@@ -33,6 +33,7 @@ class SpecificCategoryProducts extends StatefulWidget {
 class _SpecificCategoryProductsState extends State<SpecificCategoryProducts> {
   bool isLoading;
   LoadData api;
+  String value = "";
   List<ProductLive> categoryProducts = [];
   getCategoryProducts() async {
     // print("${APIUrl}items?sub_id=${widget.chosenCategoryID.toString()}&type=all");
@@ -145,15 +146,22 @@ class _SpecificCategoryProductsState extends State<SpecificCategoryProducts> {
     super.initState();
   }
 
+  List<String> apiSort = ["lowestPrice", "highestPrice", "bestDiscount"];
   @override
   Widget build(BuildContext context) {
+    List<String> filter = [
+      AppLocalizations.of(context).translate("high_price"),
+      AppLocalizations.of(context).translate("low_price"),
+      AppLocalizations.of(context).translate("high_discount"),
+    ];
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         shape: shapeForAppBars(),
         title: Text(
           widget.chosenCategory,
           style: TextStyle(
-              fontFamily: usedFont, fontSize: 17.sp, color: brandColor),
+              fontFamily: usedFont, fontSize: 17.sp, color: titleColor),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -188,12 +196,79 @@ class _SpecificCategoryProductsState extends State<SpecificCategoryProducts> {
                     ],
                   ),
                 )
-              : ScrollableListTabView(
-                  tabHeight: 7.h,
-                  bodyAnimationDuration: const Duration(milliseconds: 150),
-                  tabAnimationCurve: Curves.easeOut,
-                  tabAnimationDuration: const Duration(milliseconds: 200),
-                  tabs: getScrollableListTabs()),
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: DropdownButton<String>(
+                          isDense: true,
+                          underline: const SizedBox(),
+                          iconEnabledColor: titleColor,
+                          iconDisabledColor: titleColor,
+                          icon: Icon(
+                            Icons.arrow_drop_down_circle_outlined,
+                            color: titleColor,
+                          ),
+                          hint: Text(
+                            (value != "") ? value : AppLocalizations.of(context).translate("sort"),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: titleColor,
+                              fontFamily: usedFont,
+                              fontSize: 13.sp,
+                            ),
+                          ),
+                          items: List.generate(filter.length, (index) {
+                            return DropdownMenuItem(
+                              value: filter[index],
+                              child: Column(
+                                children: [
+                                  Text(
+                                    filter[index],
+                                    style: TextStyle(
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: brandColor,
+                                  )
+                                ],
+                              ),
+                              onTap: () {
+                                // newItem.sortList(index);
+                                setState(() {
+                                  value = filter[index];
+                                });
+                                // firstLoad();
+                              },
+                            );
+                          }),
+                          onChanged: (val) {
+                            setState(() {
+                              value = val;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Expanded(
+                      child: ScrollableListTabView(
+                        
+                          tabHeight: 7.h,
+                          bodyAnimationDuration:
+                              const Duration(milliseconds: 150),
+                          tabAnimationCurve: Curves.easeOut,
+                          tabAnimationDuration:
+                              const Duration(milliseconds: 200),
+                          tabs: getScrollableListTabs()),
+                    ),
+                  ],
+                ),
     );
   }
 
@@ -214,12 +289,14 @@ class _SpecificCategoryProductsState extends State<SpecificCategoryProducts> {
               tab: ListTab(
                 label: Text(
                   widget.subcategoriesTitlesList[i],
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: usedFont,
-                      fontSize: 13.sp,
-                      color: Colors.black54),
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      ),
                 ),
-                activeBackgroundColor: brandColor,
+                activeBackgroundColor: titleColor,
                 inactiveBackgroundColor: Colors.white,
                 borderColor: Colors.red,
               ),

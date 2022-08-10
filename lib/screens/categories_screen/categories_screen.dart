@@ -17,6 +17,7 @@ class CategoriesGridView extends StatelessWidget {
         Provider.of<HomeProvider>(context, listen: false).categoriesList;
     // List<Brand> visibleWidgets=brandsList.where((widget) => widget.brandTitle == "JBS").toList();
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         shape: shapeForAppBars(),
         title: Text(

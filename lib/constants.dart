@@ -7,8 +7,7 @@ import 'package:sweet/providers/app_localizations.dart';
 import 'package:sweet/providers/changeLang.dart';
 import 'package:sizer/sizer.dart';
 
-// Base Url test
-// ممكن اعمل رن على الاميوليتر؟
+
 /*
 final String baseUrl = "https://apitest.myfatoorah.com";
 final String mAPIKey = "bearer Tfwjij9tbcHVD95LUQfsOtbfcEEkw1hkDGvUbWPs9CscSxZOttanv3olA6U6f84tBCXX93GpEqkaP_wfxEyNawiqZRb3Bmflyt5Iq5wUoMfWgyHwrAe1jcpvJP6xRq3FOeH5y9yXuiDaAILALa0hrgJH5Jom4wukj6msz20F96Dg7qBFoxO6tB62SRCnvBHe3R-cKTlyLxFBd23iU9czobEAnbgNXRy0PmqWNohXWaqjtLZKiYY-Z2ncleraDSG5uHJsC5hJBmeIoVaV4fh5Ks5zVEnumLmUKKQQt8EssDxXOPk4r3r1x8Q7tvpswBaDyvafevRSltSCa9w7eg6zxBcb8sAGWgfH4PDvw7gfusqowCRnjf7OD45iOegk2iYSrSeDGDZMpgtIAzYVpQDXb_xTmg95eTKOrfS9Ovk69O7YU-wuH4cfdbuDPTQEIxlariyyq_T8caf1Qpd_XKuOaasKTcAPEVUPiAzMtkrts1QnIdTy1DYZqJpRKJ8xtAr5GG60IwQh2U_-u7EryEGYxU_CUkZkmTauw2WhZka4M0TiB3abGUJGnhDDOZQW2p0cltVROqZmUz5qGG_LVGleHU3-DgA46TtK8lph_F9PdKre5xqXe6c5IYVTk4e7yXd6irMNx4D4g1LxuD8HL4sYQkegF2xHbbN8sFy4VSLErkb9770-0af9LT29kzkva5fERMV90w";
@@ -24,6 +23,8 @@ const String APIUrl =
     "https://sweeeth.com/api/v1/";
 const String usedFont = "Cairo";
 const Color brandColor = Color(0xFF00ABFE);
+const Color titleColor =Color(0xff1c70c8);
+Color titleColorDeep = Color(0xff022f8e); 
 Color brandColor100 = Colors.blueAccent[100];
 Color scaffoldBgColor = Color(0xFFF4F4F4);
 Color primaryColor = Color(0xFFF2647C);
