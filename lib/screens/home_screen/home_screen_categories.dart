@@ -94,7 +94,7 @@ class HomeScreenCategories extends StatelessWidget {
                             Container(
                               width: 20.w,
                               decoration: BoxDecoration(
-                                color: titleColor.withOpacity(0.5),
+                                color: titleColor.withOpacity(0.33),
                                 borderRadius: BorderRadius.circular(2.w),
                               ),
                               child: Center(
@@ -129,26 +129,29 @@ class HomeScreenCategories extends StatelessWidget {
                 ),
               ),
             ),
-            (i % 2 == 0) ? SizedBox(height: 3.h) : const SizedBox(),
             (i % 2 == 0)
-                ? InkWell(
-                  onTap: () async{
-                   await launch("https://bluezonekw.com/");
-                  },
-                  child: Container(
-                      width: double.infinity,
-                      height: 30.w,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              "https://img.freepik.com/free-photo/eastern-sweets-assorted-traditional-turkish-delight-with-nuts_114579-20603.jpg?w=1380&t=st=1660124611~exp=1660125211~hmac=a8c664be440f1c88deabce155e6a079981645348c97dc04a5b36f9e848f669ac"),
-                          fit: BoxFit.fitWidth,
+                ? Column(
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await launch("https://bluezonekw.com/");
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 53.w,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://img.freepik.com/free-photo/eastern-sweets-assorted-traditional-turkish-delight-with-nuts_114579-20603.jpg?w=1380&t=st=1660124611~exp=1660125211~hmac=a8c664be440f1c88deabce155e6a079981645348c97dc04a5b36f9e848f669ac"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                )
+                      SizedBox(height: 3.2.h)
+                    ],
+                  )
                 : const SizedBox(),
-            (i % 2 == 0) ? SizedBox(height: 3.h) : const SizedBox(),
           ],
         );
       },

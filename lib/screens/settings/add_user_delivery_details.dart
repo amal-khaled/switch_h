@@ -402,74 +402,77 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
     );
   }
 
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
 
-    return Container(
-      color: scaffoldBgColor,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        bottomNavigationBar: Material(
-          child: Container(
-            height: 12.h,
-            width: 100.w,
-            child: Column(
-              children: [
-                Container(
-                    width: double.infinity,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.info_outline,
-                          color: Color(0xFF666666),
-                          size: defaultIconSize,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)
-                              .translate("yourDataIsProtected"),
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontFamily: usedFont,
-                            fontSize: defaultFontSize - 8,
-                            fontStyle: FontStyle.normal,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    )),
-                Container(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      bottomNavigationBar: Material(
+        child: Container(
+          height: 13.h,
+          width: 100.w,
+          child: Column(
+            children: [
+              Container(
                   width: double.infinity,
-                  decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: brandColor,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.info_outline,
+                        color: Color(0xFF666666),
+                        size: defaultIconSize,
                       ),
-                      BoxShadow(
-                        color: brandColor,
+                      Text(
+                        AppLocalizations.of(context)
+                            .translate("yourDataIsProtected"),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: usedFont,
+                          fontSize: defaultFontSize - 8,
+                          fontStyle: FontStyle.normal,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
                     ],
-                  ),
-                  child: MaterialButton(
-                      highlightColor: Colors.transparent,
-                      splashColor: brandColor,
-                      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 42.0),
-                        child: Text(
-                          widget.isPayable
-                              ? AppLocalizations.of(context)
-                                  .translate("saveAndContinue")
-                              : AppLocalizations.of(context).translate("save"),
-                          style: TextStyle(
-                              fontFamily: usedFont,
-                              fontSize: 17.sp,
-                              color: Colors.white),
-                        ),
+                  )),
+              SizedBox(
+                height: 2,
+              ),
+              Container(
+                width: double.infinity,
+                decoration: new BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: titleColor,
+                    ),
+                    BoxShadow(
+                      color: titleColor,
+                    ),
+                  ],
+                ),
+                child: MaterialButton(
+                    highlightColor: Colors.transparent,
+                    splashColor: titleColor,
+                    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 42.0),
+                      child: Text(
+                        widget.isPayable
+                            ? AppLocalizations.of(context)
+                                .translate("saveAndContinue")
+                            : AppLocalizations.of(context).translate("save"),
+                        style: TextStyle(
+                            fontFamily: usedFont,
+                            fontSize: 17.sp,
+                            color: Colors.white),
                       ),
-                      onPressed: () async {
+                    ),
+                    onPressed: () async {
+                      if (formKey.currentState.validate()) {
                         if (inputValidationCheck()) {
                           await updateUserInfo();
                           if (widget.isPayable) {
@@ -502,22 +505,25 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                             );
                           }
                         }
-                      }),
-                ),
-              ],
-            ),
+                      }
+                    }),
+              ),
+            ],
           ),
         ),
-        body: Column(
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
-            ),
-            getAppBarUI(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
+      ),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: MediaQuery.of(context).padding.top,
+          ),
+          getAppBarUI(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 1.8,
+                child: Form(
+                  key: formKey,
                   child: Column(
                     children: <Widget>[
                       //getSearchBarUI(),
@@ -549,7 +555,7 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                           ),
                         ],
                       ),
-                      Flexible(
+                      Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 8.0, left: 18, right: 16),
@@ -557,103 +563,129 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Expanded(
-                                child: TextField(
-                                  controller: userNameController,
-                                  //obscureText: _obscureText,
-                                  showCursor: true,
-                                  decoration: InputDecoration(
-                                    labelText: AppLocalizations.of(context)
-                                        .translate("userName"),
-                                    labelStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
+                              TextFormField(
+                                controller: userNameController,
+                                //obscureText: _obscureText,
+                                showCursor: true,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "name is required";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .translate("userName"),
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                  ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  filled: true,
+                                  prefixIcon: Icon(
+                                    Icons.star,
+                                    color: Colors.grey,
+                                    size: defaultIconSize - 5,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      Icons.person,
+                                      color: titleColor,
+                                      size: defaultIconSize,
                                     ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: const BorderSide(
-                                          color: brandColor,
-                                          width: 1.0,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    filled: true,
-                                    prefixIcon: Icon(
-                                      Icons.star,
-                                      color: Colors.grey,
-                                      size: defaultIconSize - 5,
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.person,
-                                        color: brandColor,
-                                        size: defaultIconSize,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                    fillColor: Colors.white,
-                                    hintStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
-                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  fillColor: Colors.white,
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontSize: defaultFontSize - 5,
                                   ),
                                 ),
                               ),
                               SizedBox(
                                 height: 6,
                               ),
-                              Expanded(
-                                child: TextField(
-                                  controller: phoneController,
-                                  //obscureText: _obscureText,
-                                  showCursor: true,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    labelText: AppLocalizations.of(context)
-                                        .translate("phoneNumber"),
-                                    labelStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
+                              TextFormField(
+                                controller: phoneController,
+                                //obscureText: _obscureText,
+                                showCursor: true,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "phone number is required";
+                                  } else {
+                                    if (value.length < 8) {
+                                      return "phone number is invalid";
+                                    } else {
+                                      return null;
+                                    }
+                                  }
+                                },
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .translate("phoneNumber"),
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                  ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  filled: true,
+                                  prefixIcon: Icon(
+                                    Icons.star,
+                                    color: Colors.grey,
+                                    size: defaultIconSize - 5,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      Icons.phone,
+                                      color: titleColor,
+                                      size: defaultIconSize,
                                     ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: const BorderSide(
-                                          color: brandColor,
-                                          width: 1.0,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    filled: true,
-                                    prefixIcon: Icon(
-                                      Icons.star,
-                                      color: Colors.grey,
-                                      size: defaultIconSize - 5,
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.phone,
-                                        color: brandColor,
-                                        size: defaultIconSize,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                    fillColor: Colors.white,
-                                    hintStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
-                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  fillColor: Colors.white,
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontSize: defaultFontSize - 5,
                                   ),
                                 ),
                               ),
@@ -663,177 +695,40 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
 
                               Visibility(
                                 visible: widget.isPayable,
-                                child: Expanded(
-                                  child: TextField(
-                                    onTap: () async {
-                                      await getDeliveryDates();
-                                      //  print(deliveryDateToTimesMap);
-                                      _showSingleChoiceDialogdates(
-                                          context,
-                                          AppLocalizations.of(context)
-                                              .translate("deliveryTime"),
-                                          dateController);
-                                    },
-                                    controller: dateController,
-                                    readOnly: true,
-                                    decoration: InputDecoration(
-                                      labelText: AppLocalizations.of(context)
-                                          .translate("chooseDeliveryDate"),
-                                      labelStyle: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: usedFont,
-                                        fontSize: defaultFontSize - 5,
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: const BorderSide(
-                                            color: brandColor,
-                                            width: 1.0,
-                                            style: BorderStyle.solid),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                      ),
-                                      filled: true,
-                                      prefixIcon: Icon(
-                                        Icons.star,
-                                        color: Colors.grey,
-                                        size: defaultIconSize - 5,
-                                      ),
-                                      suffixIcon: isDatesLoading
-                                          ? Container(
-                                              width: 2.w,
-                                              height: 2.h,
-                                              child: Center(
-                                                  child:
-                                                      CircularProgressIndicator()))
-                                          : Icon(
-                                              Icons.date_range,
-                                              color: brandColor,
-                                              size: defaultIconSize,
-                                            ),
-                                      fillColor: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: widget.isPayable,
-                                child: SizedBox(
-                                  height: 6,
-                                ),
-                              ),
-                              Visibility(
-                                visible: widget.isPayable,
-                                child: Expanded(
-                                  child: TextField(
-                                    onTap: () async {
-                                      if (dateController.text.isEmpty) {
-                                        Fluttertoast.showToast(
-                                          msg: AppLocalizations.of(context)
-                                              .translate("chooseDateFirst"),
-                                          backgroundColor: Theme.of(context)
-                                              .textTheme
-                                              .headline6
-                                              .color,
-                                          textColor: Theme.of(context)
-                                              .appBarTheme
-                                              .backgroundColor,
-                                        );
-                                      } else {
-                                        _showSingleTimeChoice(
-                                            context,
-                                            AppLocalizations.of(context)
-                                                .translate("deliveryTime"),
-                                            deliveryTimesList,
-                                            timeController);
-                                        // _showSingleChoiceDialog(
-                                        //     context,
-                                        //     AppLocalizations.of(context)
-                                        //         .translate("deliveryTime"),
-                                        //     deliveryTimesList,
-                                        //     timeController);
-                                      }
-                                    },
-                                    controller: timeController,
-                                    readOnly: true,
-                                    showCursor: true,
-                                    decoration: InputDecoration(
-                                      labelText: AppLocalizations.of(context)
-                                          .translate("deliveryTime"),
-                                      labelStyle: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: usedFont,
-                                        fontSize: defaultFontSize - 5,
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: const BorderSide(
-                                            color: brandColor,
-                                            width: 1.0,
-                                            style: BorderStyle.solid),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                      ),
-                                      filled: true,
-                                      prefixIcon: Icon(
-                                        Icons.star,
-                                        color: Colors.grey,
-                                        size: defaultIconSize - 5,
-                                      ),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          Icons.watch,
-                                          color: brandColor,
-                                          size: defaultIconSize,
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                      fillColor: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: widget.isPayable,
-                                child: SizedBox(
-                                  height: 6,
-                                ),
-                              ),
-                              Expanded(
                                 child: TextField(
                                   onTap: () async {
-                                    await getGovern();
-                                    _showSingleChoiceDialog(
+                                    await getDeliveryDates();
+                                    //  print(deliveryDateToTimesMap);
+                                    _showSingleChoiceDialogdates(
                                         context,
                                         AppLocalizations.of(context)
-                                            .translate("chooseYourCity"),
-                                        governToPriceMap,
-                                        cityController);
+                                            .translate("deliveryTime"),
+                                        dateController);
                                   },
-                                  controller: cityController,
+                                  controller: dateController,
                                   readOnly: true,
                                   decoration: InputDecoration(
                                     labelText: AppLocalizations.of(context)
-                                        .translate("chooseYourCity"),
+                                        .translate("chooseDeliveryDate"),
                                     labelStyle: TextStyle(
                                       color: Colors.grey,
                                       fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
                                     ),
                                     enabledBorder: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide: const BorderSide(
-                                          color: brandColor,
+                                          color: titleColor,
                                           width: 1.0,
                                           style: BorderStyle.solid),
                                     ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
@@ -844,211 +739,407 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                       color: Colors.grey,
                                       size: defaultIconSize - 5,
                                     ),
-                                    suffixIcon: isCityLoading
+                                    suffixIcon: isDatesLoading
                                         ? Container(
                                             width: 2.w,
                                             height: 2.h,
                                             child: Center(
                                                 child:
                                                     CircularProgressIndicator()))
-                                        : IconButton(
-                                            icon: Icon(
-                                              Icons.location_city_rounded,
-                                              color: brandColor,
-                                              size: defaultIconSize,
-                                            ),
-                                            onPressed: () async {
-                                              await getGovern();
-                                              _showSingleChoiceDialog(
-                                                  context,
-                                                  AppLocalizations.of(context)
-                                                      .translate(
-                                                          "chooseYourCity"),
-                                                  governToPriceMap,
-                                                  cityController);
-                                            },
+                                        : Icon(
+                                            Icons.date_range,
+                                            color: titleColor,
+                                            size: defaultIconSize,
                                           ),
                                     fillColor: Colors.white,
                                   ),
+                                ),
+                              ),
+                              Visibility(
+                                visible: widget.isPayable,
+                                child: SizedBox(
+                                  height: 6,
+                                ),
+                              ),
+                              Visibility(
+                                visible: widget.isPayable,
+                                child: TextField(
+                                  onTap: () async {
+                                    if (dateController.text.isEmpty) {
+                                      Fluttertoast.showToast(
+                                        msg: AppLocalizations.of(context)
+                                            .translate("chooseDateFirst"),
+                                        backgroundColor: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            .color,
+                                        textColor: Theme.of(context)
+                                            .appBarTheme
+                                            .backgroundColor,
+                                      );
+                                    } else {
+                                      _showSingleTimeChoice(
+                                          context,
+                                          AppLocalizations.of(context)
+                                              .translate("deliveryTime"),
+                                          deliveryTimesList,
+                                          timeController);
+                                      // _showSingleChoiceDialog(
+                                      //     context,
+                                      //     AppLocalizations.of(context)
+                                      //         .translate("deliveryTime"),
+                                      //     deliveryTimesList,
+                                      //     timeController);
+                                    }
+                                  },
+                                  controller: timeController,
+                                  readOnly: true,
+                                  showCursor: true,
+                                  decoration: InputDecoration(
+                                    labelText: AppLocalizations.of(context)
+                                        .translate("deliveryTime"),
+                                    labelStyle: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: usedFont,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                    ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide: const BorderSide(
+                                          color: titleColor,
+                                          width: 1.0,
+                                          style: BorderStyle.solid),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    filled: true,
+                                    prefixIcon: Icon(
+                                      Icons.star,
+                                      color: Colors.grey,
+                                      size: defaultIconSize - 5,
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.watch,
+                                        color: titleColor,
+                                        size: defaultIconSize,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    fillColor: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Visibility(
+                                visible: widget.isPayable,
+                                child: SizedBox(
+                                  height: 6,
+                                ),
+                              ),
+                              TextField(
+                                onTap: () async {
+                                  await getGovern();
+                                  _showSingleChoiceDialog(
+                                      context,
+                                      AppLocalizations.of(context)
+                                          .translate("chooseYourCity"),
+                                      governToPriceMap,
+                                      cityController);
+                                },
+                                controller: cityController,
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .translate("chooseYourCity"),
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                  ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  filled: true,
+                                  prefixIcon: Icon(
+                                    Icons.star,
+                                    color: Colors.grey,
+                                    size: defaultIconSize - 5,
+                                  ),
+                                  suffixIcon: isCityLoading
+                                      ? Container(
+                                          width: 2.w,
+                                          height: 2.h,
+                                          child: Center(
+                                              child:
+                                                  CircularProgressIndicator()))
+                                      : IconButton(
+                                          icon: Icon(
+                                            Icons.location_city_rounded,
+                                            color: titleColor,
+                                            size: defaultIconSize,
+                                          ),
+                                          onPressed: () async {
+                                            await getGovern();
+                                            _showSingleChoiceDialog(
+                                                context,
+                                                AppLocalizations.of(context)
+                                                    .translate(
+                                                        "chooseYourCity"),
+                                                governToPriceMap,
+                                                cityController);
+                                          },
+                                        ),
+                                  fillColor: Colors.white,
                                 ),
                               ),
                               //
                               SizedBox(
                                 height: 6,
                               ),
-                              Expanded(
-                                child: TextField(
-                                  controller: regionController,
-                                  //obscureText: _obscureText,
-                                  showCursor: true,
-                                  decoration: InputDecoration(
-                                    labelText: AppLocalizations.of(context)
-                                        .translate("region"),
-                                    labelStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: const BorderSide(
-                                          color: brandColor,
-                                          width: 1.0,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    filled: true,
-                                    prefixIcon: Icon(
-                                      Icons.star,
-                                      color: Colors.grey,
-                                      size: defaultIconSize - 5,
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.edit,
-                                        color: brandColor,
-                                        size: defaultIconSize,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                    fillColor: Colors.white,
+                              TextFormField(
+                                controller: regionController,
+                                //obscureText: _obscureText,
+                                showCursor: true,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "region is required";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .translate("region"),
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  filled: true,
+                                  prefixIcon: Icon(
+                                    Icons.star,
+                                    color: Colors.grey,
+                                    size: defaultIconSize - 5,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      Icons.home_filled,
+                                      color: titleColor,
+                                      size: defaultIconSize,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  fillColor: Colors.white,
                                 ),
                               ),
                               SizedBox(
                                 height: 6,
                               ),
-                              Expanded(
-                                child: TextField(
-                                  controller: plotController,
-                                  //obscureText: _obscureText,
-                                  showCursor: true,
-                                  decoration: InputDecoration(
-                                    labelText: AppLocalizations.of(context)
-                                        .translate("plotNumber"),
-                                    labelStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: const BorderSide(
-                                          color: brandColor,
-                                          width: 1.0,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    filled: true,
-                                    prefixIcon: Icon(
-                                      Icons.star,
-                                      color: Colors.grey,
-                                      size: defaultIconSize - 5,
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.edit,
-                                        color: brandColor,
-                                        size: defaultIconSize,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                    fillColor: Colors.white,
+                              TextFormField(
+                                controller: plotController,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "this field is required";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                showCursor: true,
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .translate("plotNumber"),
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  filled: true,
+                                  prefixIcon: Icon(
+                                    Icons.star,
+                                    color: Colors.grey,
+                                    size: defaultIconSize - 5,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      Icons.home_filled,
+                                      color: titleColor,
+                                      size: defaultIconSize,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  fillColor: Colors.white,
                                 ),
                               ),
                               SizedBox(
                                 height: 6,
                               ),
-                              Expanded(
-                                child: TextField(
-                                  controller: streetController,
-                                  //obscureText: _obscureText,
-                                  showCursor: true,
-                                  decoration: InputDecoration(
-                                    labelText: AppLocalizations.of(context)
-                                        .translate("streetName"),
-                                    labelStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: const BorderSide(
-                                          color: brandColor,
-                                          width: 1.0,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    filled: true,
-                                    prefixIcon: Icon(
-                                      Icons.star,
-                                      color: Colors.grey,
-                                      size: defaultIconSize - 5,
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.edit,
-                                        color: brandColor,
-                                        size: defaultIconSize,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                    fillColor: Colors.white,
+                              TextFormField(
+                                controller: streetController,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "street is required";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                showCursor: true,
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .translate("streetName"),
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  filled: true,
+                                  prefixIcon: Icon(
+                                    Icons.star,
+                                    color: Colors.grey,
+                                    size: defaultIconSize - 5,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      Icons.add_road,
+                                      color: titleColor,
+                                      size: defaultIconSize,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  fillColor: Colors.white,
                                 ),
                               ),
                               SizedBox(
                                 height: 6,
                               ),
-                              Expanded(
-                                child: TextField(
-                                  controller: gaddaController,
-                                  showCursor: true,
-                                  decoration: InputDecoration(
-                                    labelText: AppLocalizations.of(context)
-                                        .translate("gadda"),
-                                    labelStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: const BorderSide(
-                                          color: brandColor,
-                                          width: 1.0,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    filled: true,
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.edit,
-                                        color: brandColor,
-                                        size: defaultIconSize,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                    fillColor: Colors.white,
+                              TextFormField(
+                                controller: gaddaController,
+                                showCursor: true,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "this field is required";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .translate("gadda"),
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  filled: true,
+                                  prefixIcon: Icon(
+                                    Icons.star,
+                                    color: Colors.grey,
+                                    size: defaultIconSize - 5,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      Icons.home_filled,
+                                      color: titleColor,
+                                      size: defaultIconSize,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  fillColor: Colors.white,
                                 ),
                               ),
                               SizedBox(
@@ -1056,141 +1147,173 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                               ),
                               Visibility(
                                 visible: userPropertyType == PropertyType.house,
-                                child: Expanded(
-                                  child: TextField(
-                                    controller: houseNumberController,
-                                    //obscureText: _obscureText,
-                                    showCursor: true,
-                                    decoration: InputDecoration(
-                                      labelText: AppLocalizations.of(context)
-                                          .translate("houseNumber"),
-                                      labelStyle: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: usedFont,
-                                        fontSize: defaultFontSize - 5,
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: const BorderSide(
-                                            color: brandColor,
-                                            width: 1.0,
-                                            style: BorderStyle.solid),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                      ),
-                                      filled: true,
-                                      prefixIcon: Icon(
-                                        Icons.star,
-                                        color: Colors.grey,
-                                        size: defaultIconSize - 5,
-                                      ),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          Icons.edit,
-                                          color: brandColor,
-                                          size: defaultIconSize,
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                      fillColor: Colors.white,
+                                child: TextFormField(
+                                  controller: houseNumberController,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "house number is required";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  showCursor: true,
+                                  decoration: InputDecoration(
+                                    labelText: AppLocalizations.of(context)
+                                        .translate("houseNumber"),
+                                    labelStyle: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: usedFont,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
                                     ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide: const BorderSide(
+                                          color: titleColor,
+                                          width: 1.0,
+                                          style: BorderStyle.solid),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    filled: true,
+                                    prefixIcon: Icon(
+                                      Icons.star,
+                                      color: Colors.grey,
+                                      size: defaultIconSize - 5,
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.home_filled,
+                                        color: titleColor,
+                                        size: defaultIconSize,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    fillColor: Colors.white,
                                   ),
                                 ),
                               ),
                               Visibility(
                                 visible:
                                     userPropertyType == PropertyType.apartment,
-                                child: Expanded(
-                                  child: TextField(
-                                    controller: apartmentNumberController,
-                                    //obscureText: _obscureText,
-                                    showCursor: true,
-                                    decoration: InputDecoration(
-                                      labelText: AppLocalizations.of(context)
-                                          .translate("apartmentNumber"),
-                                      labelStyle: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: usedFont,
-                                        fontSize: defaultFontSize - 5,
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: const BorderSide(
-                                            color: brandColor,
-                                            width: 1.0,
-                                            style: BorderStyle.solid),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                      ),
-                                      filled: true,
-                                      prefixIcon: Icon(
-                                        Icons.star,
-                                        color: Colors.grey,
-                                        size: defaultIconSize - 5,
-                                      ),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          Icons.edit,
-                                          color: brandColor,
-                                          size: defaultIconSize,
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                      fillColor: Colors.white,
+                                child: TextFormField(
+                                  controller: apartmentNumberController,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "apartment number is required";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  showCursor: true,
+                                  decoration: InputDecoration(
+                                    labelText: AppLocalizations.of(context)
+                                        .translate("apartmentNumber"),
+                                    labelStyle: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: usedFont,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
                                     ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    filled: true,
+                                    prefixIcon: Icon(
+                                      Icons.star,
+                                      color: Colors.grey,
+                                      size: defaultIconSize - 5,
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.apartment,
+                                        color: titleColor,
+                                        size: defaultIconSize,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    fillColor: Colors.white,
                                   ),
                                 ),
                               ),
                               Visibility(
                                 visible:
                                     userPropertyType == PropertyType.office,
-                                child: Expanded(
-                                  child: TextField(
-                                    controller: officeNumberController,
-                                    //obscureText: _obscureText,
-                                    showCursor: true,
-                                    decoration: InputDecoration(
-                                      labelText: AppLocalizations.of(context)
-                                          .translate("officeNumber"),
-                                      labelStyle: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: usedFont,
-                                        fontSize: defaultFontSize - 5,
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: const BorderSide(
-                                            color: brandColor,
-                                            width: 1.0,
-                                            style: BorderStyle.solid),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                      ),
-                                      filled: true,
-                                      prefixIcon: Icon(
-                                        Icons.star,
-                                        color: Colors.grey,
-                                        size: defaultIconSize - 5,
-                                      ),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          Icons.edit,
-                                          color: brandColor,
-                                          size: defaultIconSize,
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                      fillColor: Colors.white,
+                                child: TextFormField(
+                                  controller: officeNumberController,
+                                  //obscureText: _obscureText,
+                                  showCursor: true,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "offfice number is required";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: AppLocalizations.of(context)
+                                        .translate("officeNumber"),
+                                    labelStyle: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: usedFont,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
                                     ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide: const BorderSide(
+                                          color: titleColor,
+                                          width: 1.0,
+                                          style: BorderStyle.solid),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    filled: true,
+                                    prefixIcon: Icon(
+                                      Icons.star,
+                                      color: Colors.grey,
+                                      size: defaultIconSize - 5,
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.edit,
+                                        color: titleColor,
+                                        size: defaultIconSize,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    fillColor: Colors.white,
                                   ),
                                 ),
                               ),
@@ -1201,46 +1324,57 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 visible: userPropertyType ==
                                         PropertyType.apartment ||
                                     userPropertyType == PropertyType.office,
-                                child: Expanded(
-                                  child: TextField(
-                                    controller: buildingNumberController,
-                                    showCursor: true,
-                                    decoration: InputDecoration(
-                                      labelText: AppLocalizations.of(context)
-                                          .translate("buildingNumber"),
-                                      labelStyle: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: usedFont,
-                                        fontSize: defaultFontSize - 5,
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: const BorderSide(
-                                            color: brandColor,
-                                            width: 1.0,
-                                            style: BorderStyle.solid),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                      ),
-                                      filled: true,
-                                      prefixIcon: Icon(
-                                        Icons.star,
-                                        color: Colors.grey,
-                                        size: defaultIconSize - 5,
-                                      ),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          Icons.edit,
-                                          color: brandColor,
-                                          size: defaultIconSize,
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                      fillColor: Colors.white,
+                                child: TextFormField(
+                                  controller: buildingNumberController,
+                                  showCursor: true,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "building number is required";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: AppLocalizations.of(context)
+                                        .translate("buildingNumber"),
+                                    labelStyle: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: usedFont,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
                                     ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide: const BorderSide(
+                                          color: titleColor,
+                                          width: 1.0,
+                                          style: BorderStyle.solid),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    filled: true,
+                                    prefixIcon: Icon(
+                                      Icons.star,
+                                      color: Colors.grey,
+                                      size: defaultIconSize - 5,
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.business_outlined,
+                                        color: titleColor,
+                                        size: defaultIconSize,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    fillColor: Colors.white,
                                   ),
                                 ),
                               ),
@@ -1256,46 +1390,57 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 visible: userPropertyType ==
                                         PropertyType.apartment ||
                                     userPropertyType == PropertyType.office,
-                                child: Expanded(
-                                  child: TextField(
-                                    controller: floorNumberController,
-                                    showCursor: true,
-                                    decoration: InputDecoration(
-                                      labelText: AppLocalizations.of(context)
-                                          .translate("floorNumber"),
-                                      labelStyle: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: usedFont,
-                                        fontSize: defaultFontSize - 5,
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                        borderSide: const BorderSide(
-                                            color: brandColor,
-                                            width: 1.0,
-                                            style: BorderStyle.solid),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
-                                      ),
-                                      filled: true,
-                                      prefixIcon: Icon(
-                                        Icons.star,
-                                        color: Colors.grey,
-                                        size: defaultIconSize - 5,
-                                      ),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          Icons.edit,
-                                          color: brandColor,
-                                          size: defaultIconSize,
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                      fillColor: Colors.white,
+                                child: TextFormField(
+                                  controller: floorNumberController,
+                                  showCursor: true,
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "floor number is required";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: AppLocalizations.of(context)
+                                        .translate("floorNumber"),
+                                    labelStyle: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: usedFont,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
                                     ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide: const BorderSide(
+                                          color: titleColor,
+                                          width: 1.0,
+                                          style: BorderStyle.solid),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    filled: true,
+                                    prefixIcon: Icon(
+                                      Icons.star,
+                                      color: Colors.grey,
+                                      size: defaultIconSize - 5,
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.home_filled,
+                                        color: titleColor,
+                                        size: defaultIconSize,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    fillColor: Colors.white,
                                   ),
                                 ),
                               ),
@@ -1308,7 +1453,7 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 ),
                               ),
                               Expanded(
-                                child: TextField(
+                                child: TextFormField(
                                   controller: othersController,
                                   //obscureText: _obscureText,
                                   showCursor: true,
@@ -1318,16 +1463,22 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                     labelStyle: TextStyle(
                                       color: Colors.grey,
                                       fontFamily: usedFont,
-                                      fontSize: defaultFontSize - 5,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
                                     ),
                                     enabledBorder: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide: const BorderSide(
-                                          color: brandColor,
+                                          color: titleColor,
                                           width: 1.0,
                                           style: BorderStyle.solid),
                                     ),
+                                    errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        borderSide:
+                                            BorderSide(color: Colors.red)),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
@@ -1336,7 +1487,7 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                     suffixIcon: IconButton(
                                       icon: Icon(
                                         Icons.edit,
-                                        color: brandColor,
+                                        color: titleColor,
                                         size: defaultIconSize,
                                       ),
                                       onPressed: () {},
@@ -1354,8 +1505,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -1380,14 +1531,17 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-            color: isSelected ? brandColor : Colors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-            border: Border.all(color: brandColor)),
+          color: isSelected ? titleColor : Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+          border: Border.all(
+            color: isSelected ? titleColor : titleColor.withOpacity(0.4),
+          ),
+        ),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             splashColor: Colors.white24,
-            borderRadius: const BorderRadius.all(Radius.circular(24.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(15.0)),
             onTap: () {
               setState(() {
                 buildingNumberController.text = "";
@@ -1402,23 +1556,29 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                   const EdgeInsets.only(top: 12, bottom: 12, left: 8, right: 8),
               child: Center(
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
+                    Center(
                       child: Icon(
                         myIcon,
-                        color: isSelected ? Colors.white : brandColor,
+                        color: isSelected ? Colors.white : titleColor,
                       ),
                     ),
-                    Text(
-                      txt,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontFamily: usedFont,
-                        fontSize: 11,
-                        letterSpacing: 0.25,
-                        color: isSelected ? Colors.white : brandColor,
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Center(
+                      child: Text(
+                        txt,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: usedFont,
+                          fontSize: 13.sp,
+                          letterSpacing: 0.25,
+                          color: isSelected ? Colors.white : titleColor,
+                        ),
                       ),
                     ),
                   ],
@@ -1540,20 +1700,20 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
             flex: 0,
             child: InkWell(
               child: Container(
-                width: 07.w,
-                height: 3.5.h,
+                width: 9.w,
+                height: 3.8.h,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40),
-                  ),
+                  shape: BoxShape.circle,
+                  // borderRadius: BorderRadius.all(
+                  //   Radius.circular(40),
+                  // ),
                   border: Border.all(
                     width: 1,
                     color: brandColor,
                     style: BorderStyle.solid,
                   ),
                 ),
-                child: Align(
-                  alignment: Alignment.center,
+                child: Center(
                   child: Icon(Icons.close),
                 ),
               ),

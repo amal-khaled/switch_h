@@ -3,10 +3,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:new_version/new_version.dart';
+import 'package:provider/provider.dart';
 import 'package:sweet/constants.dart';
 import 'package:sweet/screens/settings/terms_and_conditions.dart';
 import '../../providers/app_localizations.dart';
-import 'add_user_delivery_details.dart';
+import '../../providers/home_provider.dart';
 import 'languages_screen.dart';
 import 'dart:async';
 import 'package:sizer/sizer.dart';
@@ -55,7 +56,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           backgroundColor: Colors.white,
           title: Text(
             AppLocalizations.of(context).translate("settings"),
-            style: TextStyle(color: brandColor),
+            style: TextStyle(
+              color: titleColor,
+              fontFamily: usedFont,
+            ),
           )),
       body: buildSettingsList(),
       backgroundColor: Colors.white,
@@ -67,29 +71,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
       color: Colors.white,
       child: ListView(
         children: [
-          ListTile(
-              title: Text(
-                AppLocalizations.of(context)
-                    .translate("yourDeliveryInformation"),
-                style: TextStyle(
-                    fontFamily: usedFont, fontSize: 14, color: Colors.black87),
-              ),
-              leading: Icon(Icons.delivery_dining),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => AddUserDeliveryDetails(false)));
-              }),
+          // ListTile(
+          //     title: Text(
+          //       AppLocalizations.of(context)
+          //           .translate("yourDeliveryInformation"),
+          //       style: TextStyle(
+          //           fontFamily: usedFont, fontSize: 14, color: Colors.black87),
+          //     ),
+          //     leading: Icon(Icons.delivery_dining),
+          //     onTap: () {
+          //       Navigator.of(context).push(MaterialPageRoute(
+          //           builder: (_) => AddUserDeliveryDetails(false)));
+          //     }),
           ListTile(
             title: Text(
               AppLocalizations.of(context).translate("language"),
               style: TextStyle(
-                  fontFamily: usedFont, fontSize: 13.sp, color: Colors.grey),
+                fontFamily: usedFont,
+                fontSize: 13.sp,
+                color: titleColor,
+              ),
             ),
             // subtitle: getApiString(
             //     context,
             //     AppLocalizations.of(context).translate("arabic"),
             //     AppLocalizations.of(context).translate("english")),
-            leading: Icon(Icons.language),
+            leading: Icon(
+              Icons.language,
+              color: Colors.black,
+            ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (_) => LanguagesScreen(),
@@ -100,9 +110,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(
               AppLocalizations.of(context).translate("termsAndConditions"),
               style: TextStyle(
-                  fontFamily: usedFont, fontSize: 13.sp, color: Colors.grey),
+                fontFamily: usedFont,
+                fontSize: 13.sp,
+                color: titleColor,
+              ),
             ),
-            leading: Icon(Icons.description),
+            leading: Icon(
+              Icons.description,
+              color: Colors.black,
+            ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (_) => TermsAndConditions(),
@@ -149,9 +165,79 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             style: TextStyle(
                                 fontFamily: usedFont,
                                 fontSize: 12.sp,
-                                color: brandColor,
+                                color: titleColor,
                                 decoration: TextDecoration.underline),
                           ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                launch("https://www.facebook.com/" +
+                                    Provider.of<HomeProvider>(context,
+                                            listen: false)
+                                        .settingList[0]
+                                        .fbLink);
+                              },
+                              child: Image.asset(
+                                "assets/icons/facebook-logo.png",
+                                color: titleColor,
+                                fit: BoxFit.contain,
+                                width: 10.w,
+                                height: 10.h,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                launch('https://instagram.com/' +
+                                    Provider.of<HomeProvider>(context,
+                                            listen: false)
+                                        .settingList[0]
+                                        .instaLink);
+                              },
+                              child: Image.asset(
+                                "assets/icons/instagram.png",
+                                color: titleColor,
+                                fit: BoxFit.contain,
+                                width: 10.w,
+                                height: 10.h,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                launch(
+                                    "https://www.linkedin.com/in/bluezoneweb");
+                              },
+                              child: Image.asset(
+                                "assets/icons/linkedin.png",
+                                color: titleColor,
+                                fit: BoxFit.contain,
+                                width: 10.w,
+                                height: 10.h,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                launch('https://twitter.com/' +
+                                    Provider.of<HomeProvider>(context,
+                                            listen: false)
+                                        .settingList[0]
+                                        .twLink);
+                              },
+                              child: Image.asset(
+                                "assets/icons/twitter.png",
+                                color: titleColor,
+                                fit: BoxFit.contain,
+                                width: 10.w,
+                                height: 10.h,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

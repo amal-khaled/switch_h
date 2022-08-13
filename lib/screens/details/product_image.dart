@@ -39,9 +39,9 @@ class _ProductImageWidgetState extends State<ProductImageWidget>
     return PreferredSize(
       preferredSize: Size(w, h),
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.white,
           elevation: 0.0,
           iconTheme: IconThemeData(color: brandColor),
         ),
@@ -61,8 +61,7 @@ class _ProductImageWidgetState extends State<ProductImageWidget>
               begin: transformationController.value,
               end: end,
             ).animate(
-              CurveTween(curve: Curves.easeOut)
-                  .animate(animationController),
+              CurveTween(curve: Curves.easeOut).animate(animationController),
             );
             animationController.forward(from: 0);
           },
@@ -77,7 +76,7 @@ class _ProductImageWidgetState extends State<ProductImageWidget>
               width: w,
               height: h,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Colors.white,
                 image: DecorationImage(
                     image: NetworkImage(
                       widget.productImage,

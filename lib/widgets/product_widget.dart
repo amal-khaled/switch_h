@@ -163,10 +163,9 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   ? Icon(
                                       Icons.add_circle,
                                       color: brandColor,
-                                      size: 33.sp,
+                                      size: 30.sp,
                                     )
                                   : ClipOval(
-                                    
                                       child: Container(
                                         color: brandColor,
                                         child: Center(
@@ -301,7 +300,7 @@ class _ProductWidgetState extends State<ProductWidget> {
         // });
         await HiveMethods.addProductToLocalCartItemObject(
             context, widget.product, 1);
-      
+
         // if (count == int.parse(data['data'])) {
         //   setState(() {
         //     count = count;

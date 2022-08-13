@@ -456,7 +456,7 @@ class _CartState extends State<Cart> {
                         },
                       ),
                       SizedBox(
-                        height:2.h,
+                        height: 2.h,
                       ),
                       discontCoupon(),
                       SizedBox(
@@ -488,12 +488,17 @@ class _CartState extends State<Cart> {
             children: [
               Text(
                 AppLocalizations.of(context).translate("copon"),
-                style: TextStyle(fontSize: 14.sp, fontFamily: usedFont, fontWeight: FontWeight.w400, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontFamily: usedFont,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
               ),
               InkWell(
                 child: Text(
                   AppLocalizations.of(context).translate("active"),
-                  style: TextStyle(fontSize: 14.sp, color: titleColor, fontFamily: usedFont),
+                  style: TextStyle(
+                      fontSize: 14.sp, color: titleColor, fontFamily: usedFont),
                 ),
                 onTap: () {
                   showDialog(
@@ -517,15 +522,17 @@ class _CartState extends State<Cart> {
                                   child: TextFormField(
                                     cursorColor: Colors.black,
                                     controller: _controller,
-                                    validator: (val) {},
+                                    validator: (val) {
+                                      return null;
+                                    },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
-                                      hintText: AppLocalizations.of(context).translate("cobon_hint"),
+                                      hintText: AppLocalizations.of(context)
+                                          .translate("cobon_hint"),
                                       hintStyle: TextStyle(
-                                        color: titleColor,
-                                        fontFamily: usedFont,
-                                        fontWeight: FontWeight.w400
-                                      ),
+                                          color: titleColor,
+                                          fontFamily: usedFont,
+                                          fontWeight: FontWeight.w400),
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: titleColor,
@@ -549,7 +556,6 @@ class _CartState extends State<Cart> {
                                             child: Icon(
                                               Icons.arrow_forward,
                                               color: Colors.white,
-                                             
                                             ),
                                           ),
                                         ),
@@ -568,9 +574,7 @@ class _CartState extends State<Cart> {
                         ),
                       );
                     },
-                  ).then((value) {
-                  
-                  });
+                  ).then((value) {});
                 },
               ),
             ],

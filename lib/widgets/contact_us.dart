@@ -8,7 +8,6 @@ class ContactSweet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       bottomNavigationBar: ContactUsBottomAppBar(
         companyName: "Bluzone",
         textColor: brandColor,
@@ -27,13 +26,14 @@ class ContactSweet extends StatelessWidget {
             .settingList[0]
             .contactEmail,
         companyName: "Sweet H",
-        companyColor: Colors.grey,
+        companyColor: titleColor,
         phoneNumber: Provider.of<HomeProvider>(context, listen: false)
             .settingList[0]
             .contactPhone,
-        website: Provider.of<HomeProvider>(context, listen: false)
-            .settingList[0]
-            .link,
+        website: "https://sweeeth.com",
+        // Provider.of<HomeProvider>(context, listen: false)
+        //     .settingList[0]
+        //     .link,
         facebookHandle: Provider.of<HomeProvider>(context, listen: false)
             .settingList[0]
             .fbLink,

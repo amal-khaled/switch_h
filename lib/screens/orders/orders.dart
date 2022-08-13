@@ -8,10 +8,10 @@ import 'dart:io';
 import 'package:sizer/sizer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sweet/local_data/boxes.dart';
+import 'package:sweet/main.dart';
 import 'package:sweet/providers/app_localizations.dart';
 import 'package:sweet/screens/orders/fatora.dart';
 import 'package:sweet/screens/orders/items.dart';
-import 'package:sweet/screens/splash/splashScreen.dart';
 import 'package:toast/toast.dart';
 import '../../constants.dart';
 
@@ -167,6 +167,7 @@ class _OrderState extends State<Order> {
                           AppLocalizations.of(context).translate("noOrders"),
                           style: TextStyle(
                             fontSize: 13.5,
+                            fontFamily: usedFont,
                             color: Colors.grey,
                           ),
                           textAlign: TextAlign.center,
@@ -176,10 +177,10 @@ class _OrderState extends State<Order> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SplashScreen()),
+                                  builder: (context) => HomeScreen()),
                             );
                           },
                           child: Container(

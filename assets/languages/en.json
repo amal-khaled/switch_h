@@ -1,5 +1,5 @@
 {
-
+"call":"Call now",
   "more":"More",
   "home":"Home",
   "categories":"Categories",
@@ -132,8 +132,17 @@
   "loading": "Loading...",
   "share": "Share",
   "deleteThis": "Delete ",
+  "website":"Visit website",
+  "twitter":"Twitter",
+  "facebook":"Facebook",
+  "insta":"Instagram",
+  "github":"Github",
+  "linked":"Linkedin",
+  "header":"Designed and Developed by",
+  "connenct":"Want to contact?",
   "ok": "OK",
   "enterEmail":"input email",
+  "email":"Send Email",
   "inputOrUpdate":"input or update",
   "areYouSure": "Are you sure?",
   "yourDataIsProtected": "Other users can't access your info.",
@@ -181,6 +190,7 @@
   "copon":"Do you have coupon ? ",
   "active":"Activate",
   "cobon_hint":"enter coupon",
+  "select_lang":"Select language",
 
 
 

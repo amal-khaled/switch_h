@@ -236,230 +236,247 @@ class _HomeScreenState extends State<HomeScreen> {
               // Add a ListView to the drawer. This ensures the user can scroll
               // through the options in the drawer if there isn't enough vertical
               // space to fit everything.
-              child: ListView(
-                // Important: Remove any padding from the ListView.
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  DrawerHeader(
-                    child: Container(
-                        /*child: Text(
-                        "sdf",
-                        textAlign: TextAlign.center,
-                      ),*/
-                        ),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/icons/logo.png"),
-                          scale: 5,
-                          colorFilter:
-                              ColorFilter.mode(Colors.red, BlendMode.dst)),
-                      color: Colors.white,
+              child: Container(
+                color: brandColor,
+                child: ListView(
+                  // Important: Remove any padding from the ListView.
+                  padding: EdgeInsets.zero,
+                  children: <Widget>[
+                    DrawerHeader(
+                      child: Container(
+                          /*child: Text(
+                          "sdf",
+                          textAlign: TextAlign.center,
+                        ),*/
+                          ),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/icons/logo.png"),
+                            scale: 5,
+                            colorFilter:
+                                ColorFilter.mode(Colors.red, BlendMode.dst)),
+                        color: brandColor,
+                      ),
                     ),
-                  ),
-                  Boxes.getUserDataBox().get("userLoginStatus") == "2"
-                      ? ListTile(
-                          leading: Icon(
-                            Icons.logout,
-                            color: brandColor,
-                          ),
-                          title: Text(
-                            AppLocalizations.of(context).translate("logout"),
-                            style: TextStyle(
-                                fontFamily: usedFont,
-                                fontSize: 12.sp,
-                                color: Colors.black54),
-                          ),
-                          onTap: () {
-                            clearUserDate();
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen()));
-                          },
-                        )
-                      : stillClearing
-                          ? Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : ListTile(
-                              leading: Icon(
-                                Icons.person,
-                                color: brandColor,
-                              ),
-                              title: Text(
-                                AppLocalizations.of(context).translate("login"),
-                                style: TextStyle(
-                                    fontFamily: usedFont,
-                                    fontSize: 12.sp,
-                                    color: Colors.black54),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignInPage()));
-                              },
+                    Boxes.getUserDataBox().get("userLoginStatus") == "2"
+                        ? ListTile(
+                            leading: Icon(
+                              Icons.logout,
+                              color: Colors.white,
                             ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.info_outline,
-                      color: brandColor,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context)
-                          .translate("yourDeliveryInformation"),
-                      style: TextStyle(
-                          fontFamily: usedFont,
-                          fontSize: 12.sp,
-                          color: Colors.black54),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => AddUserDeliveryDetails(
-                                false,
-                              )));
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.category,
-                      color: brandColor,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context).translate("categories"),
-                      style: TextStyle(
-                          fontFamily: usedFont,
-                          fontSize: 12.sp,
-                          color: Colors.black54),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CategoriesGridView()));
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.branding_watermark,
-                      color: brandColor,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context).translate("brands"),
-                      style: TextStyle(
-                          fontFamily: usedFont,
-                          fontSize: 12.sp,
-                          color: Colors.black54),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BrandsGridView()));
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.delivery_dining,
-                      color: brandColor,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context).translate("myOrders"),
-                      style: TextStyle(
-                          fontFamily: usedFont,
-                          fontSize: 12.sp,
-                          color: Colors.black54),
-                    ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Order()));
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.settings,
-                      color: brandColor,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context).translate("settings"),
-                      style: TextStyle(
-                          fontFamily: usedFont,
-                          fontSize: 12.sp,
-                          color: Colors.black54),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsScreen()));
-                    },
-                  ),
-                  Divider(),
-                  FutureBuilder<PackageInfo>(
-                      future: getPackageNameInFutureFormat(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<PackageInfo> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Container(
-                            height: 0,
-                            width: 0,
-                          );
-                        } else if (snapshot.connectionState ==
-                                ConnectionState.done &&
-                            snapshot.hasData) {
-                          return ListTile(
-                              title: Text(
-                                AppLocalizations.of(context).translate("share"),
-                                style: TextStyle(
+                            title: Text(
+                              AppLocalizations.of(context).translate("logout"),
+                              style: TextStyle(
+                                  fontFamily: usedFont,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white),
+                            ),
+                            onTap: () {
+                              clearUserDate();
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreen()));
+                            },
+                          )
+                        : stillClearing
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ListTile(
+                                leading: Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                ),
+                                title: Text(
+                                  AppLocalizations.of(context)
+                                      .translate("login"),
+                                  style: TextStyle(
                                     fontFamily: usedFont,
                                     fontSize: 12.sp,
-                                    color: Colors.black54),
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignInPage()));
+                                },
                               ),
-                              leading: Icon(
-                                Icons.share,
-                                color: brandColor,
-                              ),
-                              onTap: () {
-                                share(
-                                    context,
-                                    'اهلا بك تستطيع تحميل Sweet H من خلال الرابط: \n https://play.google.com/store/apps/details?'
-                                            'id=' +
-                                        snapshot.data.packageName);
-                                Navigator.pop(context);
-                              });
-                        } else
-                          return Container(
-                              height: 1.h,
-                              width: 1.w,
-                              child: CircularProgressIndicator());
-                        //handle other connection statuses
-                      }),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.contact_phone,
-                      color: brandColor,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context).translate("contactUs"),
-                      style: TextStyle(
+                    Divider(),
+                    ListTile(
+                      leading: Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        AppLocalizations.of(context)
+                            .translate("yourDeliveryInformation"),
+                        style: TextStyle(
                           fontFamily: usedFont,
                           fontSize: 12.sp,
-                          color: Colors.black54),
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => AddUserDeliveryDetails(
+                                  false,
+                                )));
+                      },
                     ),
-                    onTap: () {
-                      showDialog();
-                    },
-                  ),
-                  Divider(),
-                ],
+                    Divider(),
+                    ListTile(
+                      leading: Icon(
+                        Icons.category,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        AppLocalizations.of(context).translate("categories"),
+                        style: TextStyle(
+                            fontFamily: usedFont,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CategoriesGridView()));
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(
+                        Icons.branding_watermark,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        AppLocalizations.of(context).translate("brands"),
+                        style: TextStyle(
+                          fontFamily: usedFont,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BrandsGridView()));
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(
+                        Icons.delivery_dining,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        AppLocalizations.of(context).translate("myOrders"),
+                        style: TextStyle(
+                            fontFamily: usedFont,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Order()));
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        AppLocalizations.of(context).translate("settings"),
+                        style: TextStyle(
+                            fontFamily: usedFont,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12.sp,
+                            color: Colors.white),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SettingsScreen()));
+                      },
+                    ),
+                    Divider(),
+                    FutureBuilder<PackageInfo>(
+                        future: getPackageNameInFutureFormat(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<PackageInfo> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Container(
+                              height: 0,
+                              width: 0,
+                            );
+                          } else if (snapshot.connectionState ==
+                                  ConnectionState.done &&
+                              snapshot.hasData) {
+                            return ListTile(
+                                title: Text(
+                                  AppLocalizations.of(context)
+                                      .translate("share"),
+                                  style: TextStyle(
+                                      fontFamily: usedFont,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12.sp,
+                                      color: Colors.white),
+                                ),
+                                leading: Icon(
+                                  Icons.share,
+                                  color: Colors.white,
+                                ),
+                                onTap: () {
+                                  share(
+                                      context,
+                                      'اهلا بك تستطيع تحميل Sweet H من خلال الرابط: \n https://play.google.com/store/apps/details?'
+                                              'id=' +
+                                          snapshot.data.packageName);
+                                  Navigator.pop(context);
+                                });
+                          } else
+                            return Container(
+                                height: 1.h,
+                                width: 1.w,
+                                child: CircularProgressIndicator());
+                          //handle other connection statuses
+                        }),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(
+                        Icons.contact_phone,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        AppLocalizations.of(context).translate("contactUs"),
+                        style: TextStyle(
+                            fontFamily: usedFont,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12.sp,
+                            color: Colors.white),
+                      ),
+                      onTap: () {
+                        showDialog();
+                      },
+                    ),
+                    Divider(),
+                  ],
+                ),
               ),
             ),
           ),

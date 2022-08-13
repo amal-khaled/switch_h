@@ -38,47 +38,105 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
             style: TextStyle(
                 fontFamily: usedFont, fontSize: 17.sp, color: brandColor),
           )),
-      body: ListView(
-        children: [
-          Column(children: [
-            ListTile(
-              title: Text(
-                AppLocalizations.of(context).translate("english"),
-                style: TextStyle(
-                    fontFamily: usedFont,
-                    fontSize: 13.sp,
-                    color: Colors.black87),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Image.asset(
+                "assets/icons/logo.png",
+                width: 30.w,
+                height: 20.h,
+                fit: BoxFit.contain,
               ),
-              trailing: trailingWidget(0),
-              onTap: () {
-                Boxes.getUserDataBox().put("userLang", "en");
-                //HiveMethods.addUserLang("en");
-                // setLanguage("en");
-                changeLanguage(0);
-                Provider.of<AppLanguage>(context, listen: false)
-                    .changeLanguage(Locale('en'));
-              },
             ),
-            ListTile(
-              title: Text(
-                AppLocalizations.of(context).translate("arabic"),
-                style: TextStyle(
-                    fontFamily: usedFont,
-                    fontSize: 13.sp,
-                    color: Colors.black87),
+            SizedBox(
+              height: 7.h,
+            ),
+            Text(
+              AppLocalizations.of(context).translate("select_lang"),
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontFamily: usedFont,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
               ),
-              trailing: trailingWidget(1),
-              onTap: () {
-                Boxes.getUserDataBox().put("userLang", "ar");
-                //HiveMethods.addUserLang("ar");
-                //setLanguage("ar");
-                changeLanguage(1);
-                Provider.of<AppLanguage>(context, listen: false)
-                    .changeLanguage(Locale('ar'));
-              },
-            )
-          ]),
-        ],
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    child: Container(
+                      width: 35.w,
+                      height: 10.h,
+                      decoration: BoxDecoration(
+                        color: (languageIndex == 0) ? Colors.white : titleColor,
+                        border: Border.all(color: titleColor),
+                        borderRadius: BorderRadius.circular(5.w),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "English",
+                          style: TextStyle(
+                            fontFamily: usedFont,
+                            fontSize: 13.sp,
+                            color: (languageIndex == 0)
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      Boxes.getUserDataBox().put("userLang", "en");
+                      //HiveMethods.addUserLang("en");
+                      // setLanguage("en");
+                      changeLanguage(0);
+                      Provider.of<AppLanguage>(context, listen: false)
+                          .changeLanguage(Locale('en'));
+                    },
+                  ),
+                  InkWell(
+                    child: Container(
+                      width: 35.w,
+                      height: 10.h,
+                      decoration: BoxDecoration(
+                        color: (languageIndex == 1) ? Colors.white : titleColor,
+                        border: Border.all(color: titleColor),
+                        borderRadius: BorderRadius.circular(5.w),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "اللغة العربية",
+                          style: TextStyle(
+                            fontFamily: usedFont,
+                            fontSize: 13.sp,
+                            color: (languageIndex == 1)
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      Boxes.getUserDataBox().put("userLang", "ar");
+                      //HiveMethods.addUserLang("ar");
+                      //setLanguage("ar");
+                      changeLanguage(1);
+                      Provider.of<AppLanguage>(context, listen: false)
+                          .changeLanguage(Locale('ar'));
+                    },
+                  )
+                ]),
+          ],
+        ),
       ),
     );
   }

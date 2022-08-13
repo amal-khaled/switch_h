@@ -139,13 +139,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ),
       bottomNavigationBar: Material(
         child: Container(
-          height: 6.h,
+          height: 15.h,
+          color: Colors.white,
           child: Row(
             children: [
               //this was item body
               Expanded(
                 child: Container(
                     padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                    height: 10.h,
                     child: OutlinedButton.icon(
                       icon: Container(
                         width: 40.sp,
@@ -177,6 +179,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               Expanded(
                 child: Container(
                     padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                    height: 10.h,
                     child: OutlinedButton.icon(
                       icon: CartIcon(
                         key: ValueKey("CartIconKey"),

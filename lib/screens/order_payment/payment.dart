@@ -382,12 +382,15 @@ class _PaymentPageState extends State<PaymentPage> {
         elevation: 0,
 
         iconTheme: IconThemeData(
-          color: brandColor,
+          color: titleColor,
         ),
         title: Text(
           AppLocalizations.of(context).translate("payment"),
           style: TextStyle(
-              fontFamily: usedFont, fontSize: 16.sp, color: brandColor),
+            fontFamily: usedFont,
+            fontSize: 16.sp,
+            color: titleColor,
+          ),
         ),
         backgroundColor: Colors.white,
       ),
