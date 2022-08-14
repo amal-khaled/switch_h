@@ -78,7 +78,7 @@ class _ProductWidgetState extends State<ProductWidget> {
             ),
           )),
       child: Container(
-        padding: EdgeInsets.only(left: 0.5, right: 0.5, top: 5, bottom: 5),
+        padding: EdgeInsets.only(left: 0.5, right: 0.5, top: 5),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
             color: Colors.white,
@@ -148,8 +148,6 @@ class _ProductWidgetState extends State<ProductWidget> {
                         ),
                       ),
                       child: Container(
-                        width: 11.w,
-                        height: 5.5.h,
                         alignment: Alignment.center,
                         child: IconButton(
                           icon: ValueListenableBuilder(
@@ -163,19 +161,21 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   ? Icon(
                                       Icons.add_circle,
                                       color: brandColor,
-                                      size: 30.sp,
+                                      size: 27.sp,
                                     )
-                                  : ClipOval(
-                                      child: Container(
-                                        color: brandColor,
-                                        child: Center(
-                                          child: Text(
-                                            value.toString(),
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14.sp),
-                                          ),
+                                  : Container(
+                                      width: 6.03.w,
+                                      height: 55.h,
+                                      decoration: BoxDecoration(
+                                          color: brandColor,
+                                          shape: BoxShape.circle),
+                                      child: Center(
+                                        child: Text(
+                                          value.toString(),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14.sp),
                                         ),
                                       ),
                                     );
@@ -293,30 +293,8 @@ class _ProductWidgetState extends State<ProductWidget> {
       if (data['state'] == "4") {
         showDialogBox(AppLocalizations.of(context).translate("sorry"),
             '${data['msg']}', context);
-        // AppLocalizations.of(context).translate("soldOut")
       } else {
-        //   setState(() {
-        //   count++;
-        // });
-        await HiveMethods.addProductToLocalCartItemObject(
-            context, widget.product, 1);
-
-        // if (count == int.parse(data['data'])) {
-        //   setState(() {
-        //     count = count;
-        //   });
-        //   showDialogBox(
-        //       AppLocalizations.of(context).translate("sorry"),
-        //       '${AppLocalizations.of(context).translate("only")} ${data['data']} ${AppLocalizations.of(context).translate("availableNow")}',
-        //       context);
-        // } else if (int.parse(data['data']) > count) {
-        //   await HiveMethods.addProductToLocalCartItemObject(
-        //       context, widget.product, 1);
-        //   setState(() {
-        //     count++;
-        //     //_isLoading = true;
-        //   });
-        // }
+        HiveMethods.addProductToLocalCartItemObject(context, widget.product, 1);
       }
     } catch (e) {
       print(e.toString());

@@ -521,7 +521,7 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height * 1.8,
+                height: MediaQuery.of(context).size.height * 1.5,
                 child: Form(
                   key: formKey,
                   child: Column(
@@ -547,6 +547,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 ),
                                 getButtonUI(PropertyType.office,
                                     userPropertyType == PropertyType.office),
+                                // getButtonUI(PropertyType.address,
+                                //     userPropertyType == PropertyType.address),
                               ],
                             ),
                           ),
@@ -569,7 +571,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 showCursor: true,
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "name is required";
+                                    return AppLocalizations.of(context)
+                                        .translate("required_name");
                                   } else {
                                     return null;
                                   }
@@ -631,10 +634,12 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 showCursor: true,
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "phone number is required";
+                                    return AppLocalizations.of(context)
+                                        .translate("required_phone");
                                   } else {
                                     if (value.length < 8) {
-                                      return "phone number is invalid";
+                                      return AppLocalizations.of(context)
+                                          .translate("invalid_phone");
                                     } else {
                                       return null;
                                     }
@@ -926,7 +931,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 showCursor: true,
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "region is required";
+                                    return AppLocalizations.of(context)
+                                        .translate("required_region");
                                   } else {
                                     return null;
                                   }
@@ -981,7 +987,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 controller: plotController,
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "this field is required";
+                                    return AppLocalizations.of(context)
+                                        .translate("required_field");
                                   } else {
                                     return null;
                                   }
@@ -1037,7 +1044,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 controller: streetController,
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "street is required";
+                                    return AppLocalizations.of(context)
+                                        .translate("required_streen");
                                   } else {
                                     return null;
                                   }
@@ -1094,7 +1102,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                 showCursor: true,
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return "this field is required";
+                                    return AppLocalizations.of(context)
+                                        .translate("required_field");
                                   } else {
                                     return null;
                                   }
@@ -1151,7 +1160,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                   controller: houseNumberController,
                                   validator: (value) {
                                     if (value.isEmpty) {
-                                      return "house number is required";
+                                      return AppLocalizations.of(context)
+                                          .translate("required_home");
                                     } else {
                                       return null;
                                     }
@@ -1208,7 +1218,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                   controller: apartmentNumberController,
                                   validator: (value) {
                                     if (value.isEmpty) {
-                                      return "apartment number is required";
+                                      return AppLocalizations.of(context)
+                                          .translate("required_apartment");
                                     } else {
                                       return null;
                                     }
@@ -1268,7 +1279,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                   showCursor: true,
                                   validator: (value) {
                                     if (value.isEmpty) {
-                                      return "offfice number is required";
+                                      return AppLocalizations.of(context)
+                                          .translate("required_office");
                                     } else {
                                       return null;
                                     }
@@ -1329,7 +1341,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                   showCursor: true,
                                   validator: (value) {
                                     if (value.isEmpty) {
-                                      return "building number is required";
+                                      return AppLocalizations.of(context)
+                                          .translate("required_building");
                                     } else {
                                       return null;
                                     }
@@ -1395,7 +1408,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                   showCursor: true,
                                   validator: (value) {
                                     if (value.isEmpty) {
-                                      return "floor number is required";
+                                      return AppLocalizations.of(context)
+                                          .translate("required_floor");
                                     } else {
                                       return null;
                                     }
@@ -1452,48 +1466,46 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                                   height: 6,
                                 ),
                               ),
-                              Expanded(
-                                child: TextFormField(
-                                  controller: othersController,
-                                  //obscureText: _obscureText,
-                                  showCursor: true,
-                                  decoration: InputDecoration(
-                                    labelText: AppLocalizations.of(context)
-                                        .translate("otherNotes"),
-                                    labelStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: usedFont,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide: const BorderSide(
-                                          color: titleColor,
-                                          width: 1.0,
-                                          style: BorderStyle.solid),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        borderSide:
-                                            BorderSide(color: Colors.red)),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    filled: true,
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.edit,
-                                        color: titleColor,
-                                        size: defaultIconSize,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                    fillColor: Colors.white,
+                              TextFormField(
+                                controller: othersController,
+                                //obscureText: _obscureText,
+                                showCursor: true,
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)
+                                      .translate("otherNotes"),
+                                  labelStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: usedFont,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide: const BorderSide(
+                                        color: titleColor,
+                                        width: 1.0,
+                                        style: BorderStyle.solid),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide:
+                                          BorderSide(color: Colors.red)),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  filled: true,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      Icons.edit,
+                                      color: titleColor,
+                                      size: defaultIconSize,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  fillColor: Colors.white,
                                 ),
                               ),
                             ],
@@ -1526,8 +1538,12 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
     } else if (PropertyType.office == categoryTypeData) {
       txt = AppLocalizations.of(context).translate("office");
       myIcon = Icons.business_rounded;
-      currentSelected = PropertyType.office;
-    }
+      currentSelected = PropertyType.office;}
+    // } else if (PropertyType.address == categoryTypeData) {
+    //   txt = AppLocalizations.of(context).translate("address");
+    //   myIcon = Icons.location_pin;
+    //   currentSelected = PropertyType.address;
+    // }
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -1728,8 +1744,6 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
   }
 }
 
-enum PropertyType {
-  house,
-  apartment,
-  office,
+enum PropertyType { house, apartment, office
+// address 
 }

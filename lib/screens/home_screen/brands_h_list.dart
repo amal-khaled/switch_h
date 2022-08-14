@@ -39,7 +39,7 @@ class BrandsInHList extends StatelessWidget {
                 Container(
                   width: 20.w,
                   decoration: BoxDecoration(
-                    color: titleColor.withOpacity(0.33),
+                    color: titleColor.withOpacity(0.7),
                     borderRadius: BorderRadius.circular(2.w),
                   ),
                   child: Center(

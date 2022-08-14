@@ -28,10 +28,11 @@ class HomeScreenCategories extends StatelessWidget {
               elevation: 0,
               color: Colors.white,
               child: Container(
-                height: 42.h,
+                height: 40.h,
                 width: double.infinity,
                 child: Column(
                   children: [
+                    SizedBox(height: MediaQuery.of(context).size.height*0.025,),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -94,7 +95,7 @@ class HomeScreenCategories extends StatelessWidget {
                             Container(
                               width: 20.w,
                               decoration: BoxDecoration(
-                                color: titleColor.withOpacity(0.33),
+                                color: titleColor.withOpacity(0.7),
                                 borderRadius: BorderRadius.circular(2.w),
                               ),
                               child: Center(
@@ -112,7 +113,9 @@ class HomeScreenCategories extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(
+                    Container(
+                      color: Colors.white,
+                      height: MediaQuery.of(context).size.height*0.3,
                       child: ListView.builder(
                         shrinkWrap: true,
                         //physics: NeverScrollableScrollPhysics(),
@@ -148,7 +151,6 @@ class HomeScreenCategories extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 3.2.h)
                     ],
                   )
                 : const SizedBox(),

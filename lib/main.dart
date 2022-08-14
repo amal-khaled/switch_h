@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:new_version/new_version.dart';
 import 'package:package_info/package_info.dart';
@@ -34,7 +35,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductLiveAdapter());
-
+   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.white,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.dark,
+  ));
   await Hive.openBox<int>('localCartItems');
   await Hive.openBox<String>('userData');
   await Hive.openBox<ProductLive>('localCartItemsObject');
@@ -481,7 +486,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           appBar: AppBar(
-            shape: shapeForAppBars(),
+            shape:  shapeForAppBars(),   
             iconTheme: IconThemeData(color: brandColor),
             centerTitle: true,
             title: Text(
@@ -491,7 +496,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             backgroundColor: Colors.white,
             elevation: 0,
-/*          leading: IconButton(
+          /*          leading: IconButton(
               icon: const Icon(Icons.menu, size: 30, color: brandColor),
               onPressed: () {
                 _controller.toggle();

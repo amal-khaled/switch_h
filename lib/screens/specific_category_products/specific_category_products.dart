@@ -258,7 +258,6 @@ class _SpecificCategoryProductsState extends State<SpecificCategoryProducts> {
                     ),
                     Expanded(
                       child: ScrollableListTabView(
-                        
                           tabHeight: 7.h,
                           bodyAnimationDuration:
                               const Duration(milliseconds: 150),

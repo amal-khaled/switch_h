@@ -183,7 +183,7 @@ TextStyle appbarSubHeadingStyle = TextStyle(
 );
 
 RoundedRectangleBorder shapeForAppBars() {
-  return RoundedRectangleBorder(
+  return RoundedRectangleBorder( 
     side: BorderSide(
       width: 2,
       color: brandColor,

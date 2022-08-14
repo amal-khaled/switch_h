@@ -311,15 +311,32 @@ class _CartState extends State<Cart> {
                                                 ),
                                               ],
                                             ),
-                                            Text(
-                                              AppLocalizations.of(context)
-                                                      .translate("totalPrice") +
-                                                  "${double.parse((Boxes.getLocalCartItemsObjectBox().get(productsIDs[index]).productPrice * Boxes.getLocalCartItemsBox().get(productsIDs[index])).toString()).toStringAsFixed(2)} ${AppLocalizations.of(context).translate("kd")}",
-                                              style: TextStyle(
-                                                  fontFamily: usedFont,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.black54),
+                                            RichText(
+                                              text: TextSpan(children: [
+                                                TextSpan(
+                                                  text: AppLocalizations.of(
+                                                              context)
+                                                          .translate(
+                                                              "totalPrice") +
+                                                      " : ",
+                                                  style: TextStyle(
+                                                      fontFamily: usedFont,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Colors.black54),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      "${double.parse((Boxes.getLocalCartItemsObjectBox().get(productsIDs[index]).productPrice * Boxes.getLocalCartItemsBox().get(productsIDs[index])).toString()).toStringAsFixed(2)} ${AppLocalizations.of(context).translate("kd")}",
+                                                  style: TextStyle(
+                                                      fontFamily: usedFont,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: titleColor),
+                                                ),
+                                              ]),
                                             ),
                                           ],
                                         ),
@@ -478,11 +495,18 @@ class _CartState extends State<Cart> {
 
   Widget discontCoupon() {
     return Container(
-      color: Colors.grey[200],
+     margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.02),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: titleColor.withOpacity(0.7),
+        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(2.w),
+      ),
       height: 10.h,
       child: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
+          padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -683,11 +707,10 @@ class _CartState extends State<Cart> {
               return Container(
                 width: double.infinity,
                 height: 7.h,
-                padding: EdgeInsets.symmetric(horizontal: 1.w),
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: brandColor),
-                    color: Colors.grey.withOpacity(0.2)),
+                    color: titleColor.withOpacity(0.2)),
                 child: Center(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
