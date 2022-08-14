@@ -31,6 +31,7 @@ class _CartState extends State<Cart> {
       bottomNavigationBar: Material(
         child: Container(
           width: 95.w,
+          color: Colors.white,
           child: Row(
             children: [
               Expanded(
@@ -102,6 +103,7 @@ class _CartState extends State<Cart> {
       ),
       appBar: AppBar(
         shape: shapeForAppBars(),
+        elevation: 0.0,
         iconTheme: IconThemeData(color: brandColor),
         title: Text(AppLocalizations.of(context).translate("cart"),
             style: TextStyle(
@@ -495,7 +497,8 @@ class _CartState extends State<Cart> {
 
   Widget discontCoupon() {
     return Container(
-     margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.02),
+      margin: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.02),
       decoration: BoxDecoration(
         border: Border.all(
           color: titleColor.withOpacity(0.7),

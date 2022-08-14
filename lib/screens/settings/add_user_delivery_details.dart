@@ -8,6 +8,7 @@ import 'package:sweet/providers/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 import 'package:sweet/real_api/load_data.dart';
 import 'package:sweet/screens/order_payment/payment.dart';
+import 'package:sweet/widgets/cutome_dropdown.dart';
 import 'package:toast/toast.dart';
 
 class AddUserDeliveryDetails extends StatefulWidget {
@@ -518,10 +519,34 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
             height: MediaQuery.of(context).padding.top,
           ),
           getAppBarUI(),
+          SizedBox(
+            height: 2.h,
+          ),
+          (widget.isPayable)
+              ? Padding(
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+                  child: CustomDropDown(
+                    text: AppLocalizations.of(context).translate("address"),
+                    items: [
+                      "address test 1",
+                      "address test 2",
+                      "address test 3",
+                      "address test 4",
+                      "address test 5",
+                      "address test 6",
+                      "address test 7",
+                    ],
+                  ),
+                )
+              : const SizedBox(),
+          SizedBox(
+            height: 2.h,
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height * 1.5,
+                height: MediaQuery.of(context).size.height * 1.3,
                 child: Form(
                   key: formKey,
                   child: Column(
@@ -1538,7 +1563,8 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
     } else if (PropertyType.office == categoryTypeData) {
       txt = AppLocalizations.of(context).translate("office");
       myIcon = Icons.business_rounded;
-      currentSelected = PropertyType.office;}
+      currentSelected = PropertyType.office;
+    }
     // } else if (PropertyType.address == categoryTypeData) {
     //   txt = AppLocalizations.of(context).translate("address");
     //   myIcon = Icons.location_pin;
@@ -1744,6 +1770,9 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
   }
 }
 
-enum PropertyType { house, apartment, office
-// address 
+enum PropertyType {
+  house,
+  apartment,
+  office
+// address
 }

@@ -21,6 +21,7 @@ import 'package:sweet/screens/orders/orders.dart';
 import 'package:sweet/screens/settings/add_user_delivery_details.dart';
 import 'package:sweet/screens/splash/splashScreen.dart';
 import 'package:sizer/sizer.dart';
+import 'package:sweet/screens/user_address.dart/user_address.dart';
 import 'package:upgrader/upgrader.dart';
 import 'constants.dart';
 import 'custom_animation.dart';
@@ -35,7 +36,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductLiveAdapter());
-   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.white,
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.dark,
@@ -381,6 +382,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     Divider(),
                     ListTile(
                       leading: Icon(
+                        Icons.location_pin,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        AppLocalizations.of(context).translate("address"),
+                        style: TextStyle(
+                            fontFamily: usedFont,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UserAddressScreen()));
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(
                         Icons.delivery_dining,
                         color: Colors.white,
                       ),
@@ -486,7 +508,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           appBar: AppBar(
-            shape:  shapeForAppBars(),   
+            shape: shapeForAppBars(),
             iconTheme: IconThemeData(color: brandColor),
             centerTitle: true,
             title: Text(
@@ -496,7 +518,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             backgroundColor: Colors.white,
             elevation: 0,
-          /*          leading: IconButton(
+            /*          leading: IconButton(
               icon: const Icon(Icons.menu, size: 30, color: brandColor),
               onPressed: () {
                 _controller.toggle();

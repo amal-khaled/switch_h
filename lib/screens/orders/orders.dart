@@ -138,9 +138,11 @@ class _OrderState extends State<Order> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           shape: shapeForAppBars(),
+          elevation: 0.0,
           iconTheme: IconThemeData(color: brandColor),
           title: Text(AppLocalizations.of(context).translate("myOrders"),
               style: TextStyle(
+                fontFamily: usedFont,
                 color: brandColor,
                 fontSize: 25,
               )),
