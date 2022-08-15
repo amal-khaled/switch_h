@@ -237,7 +237,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           key: homeScaffoldKey,
           backgroundColor: Colors.white,
-          drawer: SafeArea(
+          drawer: SizedBox(
+           height: MediaQuery.of(context).size.height,
             child: Drawer(
               // Add a ListView to the drawer. This ensures the user can scroll
               // through the options in the drawer if there isn't enough vertical
