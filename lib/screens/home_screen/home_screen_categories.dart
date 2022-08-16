@@ -28,11 +28,13 @@ class HomeScreenCategories extends StatelessWidget {
               elevation: 0,
               color: Colors.white,
               child: Container(
-                height: 40.h,
+                // height: 40.h,
                 width: double.infinity,
                 child: Column(
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height*0.025,),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.025,
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -115,7 +117,7 @@ class HomeScreenCategories extends StatelessWidget {
                     ),
                     Container(
                       color: Colors.white,
-                      height: MediaQuery.of(context).size.height*0.3,
+                      height: MediaQuery.of(context).size.height * 0.3,
                       child: ListView.builder(
                         shrinkWrap: true,
                         //physics: NeverScrollableScrollPhysics(),
@@ -135,6 +137,9 @@ class HomeScreenCategories extends StatelessWidget {
             (i % 2 == 0)
                 ? Column(
                     children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.013,
+                      ),
                       InkWell(
                         onTap: () async {
                           await launch("https://bluezonekw.com/");

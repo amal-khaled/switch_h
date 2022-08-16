@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sweet/constants.dart';
 
 class CustomDropDown extends StatefulWidget {
+  static String chosenValue;
   const CustomDropDown(
       {Key key,
       this.items,
@@ -23,8 +24,6 @@ class CustomDropDown extends StatefulWidget {
 }
 
 class _CustomDropDownState extends State<CustomDropDown> {
-  String _chosenValue;
-
   // List<String>? categories = widget.items;
 
   @override
@@ -50,7 +49,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
         decoration: const InputDecoration(
           border: InputBorder.none,
         ),
-        value: _chosenValue,
+        value: CustomDropDown.chosenValue,
         items: widget.items.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem(
             value: value,
@@ -74,9 +73,9 @@ class _CustomDropDownState extends State<CustomDropDown> {
         ),
         onChanged: (String value) {
           setState(() {
-            _chosenValue = value;
+            CustomDropDown.chosenValue = value;
           });
-          _chosenValue = value;
+          CustomDropDown.chosenValue = value;
         },
         onSaved: widget.onSave,
         validator: widget.validator,

@@ -15,6 +15,7 @@ class TermsAndConditions extends StatelessWidget {
       appBar: AppBar(
         shape: shapeForAppBars(),
         iconTheme: IconThemeData(color: brandColor),
+        elevation: 0.0,
         title: Text(
           AppLocalizations.of(context).translate("termsAndConditions"),
           style: TextStyle(
@@ -22,30 +23,31 @@ class TermsAndConditions extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      body: Center(
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: RichText(
-                  text: TextSpan(
-                    text: getApiString(
-                        context,
-                        Provider.of<HomeProvider>(context, listen: false)
-                            .settingList[0]
-                            .strategy,
-                        Provider.of<HomeProvider>(context, listen: false)
-                            .settingList[0]
-                            .strategyEn),
-                    style: TextStyle(
-                        fontFamily: usedFont, fontSize: 12, color: Colors.grey),
-                  ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            RichText(
+              textAlign: TextAlign.start,
+              text: TextSpan(
+                text: getApiString(
+                    context,
+                    Provider.of<HomeProvider>(context, listen: false)
+                        .settingList[0]
+                        .strategy,
+                    Provider.of<HomeProvider>(context, listen: false)
+                        .settingList[0]
+                        .strategyEn),
+                style: TextStyle(
+                  fontFamily: usedFont,
+                  fontSize: 12,
+                  color: Colors.black,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

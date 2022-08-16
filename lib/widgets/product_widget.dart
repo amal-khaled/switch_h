@@ -221,48 +221,28 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    alignment: Alignment.center,
-                    //padding: EdgeInsets.only(left: 5, right: 5, top: 5),
-                    child: Text(
-                      getApiString(
-                          context,
-                          widget.product.productTitle.length > 16
-                              ? widget.product.productTitle.replaceRange(
-                                  16, widget.product.productTitle.length, '...')
-                              : widget.product.productTitle,
-                          widget.product.productEnglishTitle.length > 16
-                              ? widget.product.productEnglishTitle.replaceRange(
-                                  16,
-                                  widget.product.productEnglishTitle.length,
-                                  '...')
-                              : widget.product.productEnglishTitle),
-                      style: TextStyle(
-                          fontFamily: usedFont,
-                          fontSize: 12.sp,
-                          color: Colors.black87),
-                    ),
-                  ),
-                ],
+              Text(
+                getApiString(
+                    context,
+                    widget.product.productTitle.length > 16
+                        ? widget.product.productTitle.replaceRange(
+                            16, widget.product.productTitle.length, '...')
+                        : widget.product.productTitle,
+                    widget.product.productEnglishTitle.length > 16
+                        ? widget.product.productEnglishTitle.replaceRange(16,
+                            widget.product.productEnglishTitle.length, '...')
+                        : widget.product.productEnglishTitle),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: usedFont,
+                    fontSize: 12.sp,
+                    color: Colors.black87),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    //alignment: Alignment.topLeft,
-                    padding: EdgeInsets.only(left: 5, right: 5, top: 5),
-                    child: Text(
-                      "${widget.product.productPrice}${AppLocalizations.of(context).translate("kd")}",
-                      style: TextStyle(
-                          fontFamily: usedFont,
-                          fontSize: 12.sp,
-                          color: brandColor),
-                    ),
-                  ),
-                ],
+              Text(
+                "${widget.product.productPrice}${AppLocalizations.of(context).translate("kd")}",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: usedFont, fontSize: 12.sp, color: brandColor),
               )
             ],
           ),

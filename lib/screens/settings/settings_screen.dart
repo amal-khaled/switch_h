@@ -19,30 +19,30 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String appVersion = "loading...";
-  findAppVersion() async {
-    final newVersion = NewVersion(
-      iOSId: '1582302249',
-      androidId: 'com.bluezone.sweet',
-    );
-    final status = await newVersion.getVersionStatus();
-    setState(() {
-      appVersion = status.localVersion;
-    });
-  }
+  // String appVersion = "loading...";
+  // findAppVersion() async {
+  //   final newVersion = NewVersion(
+  //     iOSId: '1582302249',
+  //     androidId: 'com.bluezone.sweet',
+  //   );
+  //   final status = await newVersion.getVersionStatus();
+  //   setState(() {
+  //     appVersion = status.localVersion;
+  //   });
+  // }
 
-  Future<void> _launchInWebViewOrVC(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: true,
-        forceWebView: true,
-        headers: <String, String>{'my_header_key': 'my_header_value'},
-      );
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  // Future<void> _launchInWebViewOrVC(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(
+  //       url,
+  //       forceSafariVC: true,
+  //       forceWebView: true,
+  //       headers: <String, String>{'my_header_key': 'my_header_value'},
+  //     );
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -130,11 +130,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 22, bottom: 0),
+                padding: const EdgeInsets.only(top: 22),
                 child: Image.asset(
                   'assets/images/bluezone_logo.png',
-                  height: 20.h,
-                  width: 20.w,
+                  height: 30.h,
+                  width: 30.w,
+                  fit: BoxFit.contain,
                   alignment: Alignment.bottomCenter,
                 ),
               ),
@@ -142,105 +143,91 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Version: $appVersion',
+                  Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Powered by BlueZone",
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            String toLaunch = 'https://bluezonekw.com/';
+                          },
                         style: TextStyle(
                             fontFamily: usedFont,
-                            fontSize: 14,
-                            color: Colors.grey),
+                            fontSize: 12.sp,
+                            color: titleColor,
+                            decoration: TextDecoration.underline),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: RichText(
-                          text: TextSpan(
-                            text: "Powered by BlueZone",
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                String toLaunch = 'https://bluezonekw.com/';
-                              },
-                            style: TextStyle(
-                                fontFamily: usedFont,
-                                fontSize: 12.sp,
-                                color: titleColor,
-                                decoration: TextDecoration.underline),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            launch("https://www.facebook.com/" +
+                                Provider.of<HomeProvider>(context,
+                                        listen: false)
+                                    .settingList[0]
+                                    .fbLink);
+                          },
+                          child: Image.asset(
+                            "assets/icons/facebook-logo.png",
+                            color: titleColor,
+                            fit: BoxFit.contain,
+                            width: 10.w,
+                            height: 10.h,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                launch("https://www.facebook.com/" +
-                                    Provider.of<HomeProvider>(context,
-                                            listen: false)
-                                        .settingList[0]
-                                        .fbLink);
-                              },
-                              child: Image.asset(
-                                "assets/icons/facebook-logo.png",
-                                color: titleColor,
-                                fit: BoxFit.contain,
-                                width: 10.w,
-                                height: 10.h,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                launch('https://instagram.com/' +
-                                    Provider.of<HomeProvider>(context,
-                                            listen: false)
-                                        .settingList[0]
-                                        .instaLink);
-                              },
-                              child: Image.asset(
-                                "assets/icons/instagram.png",
-                                color: titleColor,
-                                fit: BoxFit.contain,
-                                width: 10.w,
-                                height: 10.h,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                launch(
-                                    "https://www.linkedin.com/in/bluezoneweb");
-                              },
-                              child: Image.asset(
-                                "assets/icons/linkedin.png",
-                                color: titleColor,
-                                fit: BoxFit.contain,
-                                width: 10.w,
-                                height: 10.h,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                launch('https://twitter.com/' +
-                                    Provider.of<HomeProvider>(context,
-                                            listen: false)
-                                        .settingList[0]
-                                        .twLink);
-                              },
-                              child: Image.asset(
-                                "assets/icons/twitter.png",
-                                color: titleColor,
-                                fit: BoxFit.contain,
-                                width: 10.w,
-                                height: 10.h,
-                              ),
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            launch('https://instagram.com/' +
+                                Provider.of<HomeProvider>(context,
+                                        listen: false)
+                                    .settingList[0]
+                                    .instaLink);
+                          },
+                          child: Image.asset(
+                            "assets/icons/instagram.png",
+                            color: titleColor,
+                            fit: BoxFit.contain,
+                            width: 10.w,
+                            height: 10.h,
+                          ),
                         ),
-                      ),
-                    ],
+                        InkWell(
+                          onTap: () {
+                            launch("https://www.linkedin.com/in/bluezoneweb");
+                          },
+                          child: Image.asset(
+                            "assets/icons/linkedin.png",
+                            color: titleColor,
+                            fit: BoxFit.contain,
+                            width: 10.w,
+                            height: 10.h,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            launch('https://twitter.com/' +
+                                Provider.of<HomeProvider>(context,
+                                        listen: false)
+                                    .settingList[0]
+                                    .twLink);
+                          },
+                          child: Image.asset(
+                            "assets/icons/twitter.png",
+                            color: titleColor,
+                            fit: BoxFit.contain,
+                            width: 10.w,
+                            height: 10.h,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -373,9 +360,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    findAppVersion();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   findAppVersion();
+  // }
 }

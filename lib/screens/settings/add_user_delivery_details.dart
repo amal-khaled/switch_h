@@ -473,37 +473,60 @@ class _AddUserDeliveryDetailsState extends State<AddUserDeliveryDetails> {
                       ),
                     ),
                     onPressed: () async {
-                      if (formKey.currentState.validate()) {
-                        if (inputValidationCheck()) {
-                          await updateUserInfo();
-                          if (widget.isPayable) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PaymentPage(
-                                        double.parse(Boxes.getUserDataBox()
-                                            .get("totalInCart")),
-                                        double.parse(Boxes.getUserDataBox()
-                                            .get("userDeliveryPrice")),
-                                        phoneController.text.toString(),
-                                        Boxes.getUserDataBox()
-                                            .get('userGovern'),
-                                        " ",
-                                        userAddressData,
-                                        dateController.text.toString(),
-                                        timeController.text.toString(),
-                                        userNameController.text,
-                                        0.0,
-                                        "kuwait")));
-                          } else {
-                            Fluttertoast.showToast(
-                              msg: AppLocalizations.of(context)
-                                  .translate("saved"),
-                              backgroundColor:
-                                  Theme.of(context).textTheme.headline6.color,
-                              textColor:
-                                  Theme.of(context).appBarTheme.backgroundColor,
-                            );
+                      if (CustomDropDown.chosenValue != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PaymentPage(
+                                double.parse(
+                                    Boxes.getUserDataBox().get("totalInCart")),
+                                double.parse(Boxes.getUserDataBox()
+                                    .get("userDeliveryPrice")),
+                                phoneController.text.toString(),
+                                Boxes.getUserDataBox().get('userGovern'),
+                                " ",
+                                CustomDropDown.chosenValue,
+                                dateController.text.toString(),
+                                timeController.text.toString(),
+                                userNameController.text,
+                                0.0,
+                                "kuwait"),
+                          ),
+                        );
+                      } else {
+                        if (formKey.currentState.validate()) {
+                          if (inputValidationCheck()) {
+                            await updateUserInfo();
+                            if (widget.isPayable) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PaymentPage(
+                                          double.parse(Boxes.getUserDataBox()
+                                              .get("totalInCart")),
+                                          double.parse(Boxes.getUserDataBox()
+                                              .get("userDeliveryPrice")),
+                                          phoneController.text.toString(),
+                                          Boxes.getUserDataBox()
+                                              .get('userGovern'),
+                                          " ",
+                                          userAddressData,
+                                          dateController.text.toString(),
+                                          timeController.text.toString(),
+                                          userNameController.text,
+                                          0.0,
+                                          "kuwait")));
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: AppLocalizations.of(context)
+                                    .translate("saved"),
+                                backgroundColor:
+                                    Theme.of(context).textTheme.headline6.color,
+                                textColor: Theme.of(context)
+                                    .appBarTheme
+                                    .backgroundColor,
+                              );
+                            }
                           }
                         }
                       }

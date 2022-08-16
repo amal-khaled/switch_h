@@ -77,7 +77,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
                       width: 35.w,
                       height: 10.h,
                       decoration: BoxDecoration(
-                        color: (languageIndex == 0) ? Colors.white : titleColor,
+                        color: (languageIndex == 0) ? titleColor : Colors.white,
                         border: Border.all(color: titleColor),
                         borderRadius: BorderRadius.circular(5.w),
                       ),
@@ -88,8 +88,8 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
                             fontFamily: usedFont,
                             fontSize: 13.sp,
                             color: (languageIndex == 0)
-                                ? Colors.black
-                                : Colors.white,
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),
@@ -108,7 +108,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
                       width: 35.w,
                       height: 10.h,
                       decoration: BoxDecoration(
-                        color: (languageIndex == 1) ? Colors.white : titleColor,
+                        color: (languageIndex == 1) ? titleColor : Colors.white,
                         border: Border.all(color: titleColor),
                         borderRadius: BorderRadius.circular(5.w),
                       ),
@@ -119,8 +119,8 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
                             fontFamily: usedFont,
                             fontSize: 13.sp,
                             color: (languageIndex == 1)
-                                ? Colors.black
-                                : Colors.white,
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ),

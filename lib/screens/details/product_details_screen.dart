@@ -147,15 +147,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               Expanded(
                 child: Container(
                     padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-                    height: 10.h,
+                    height: 7.h,
                     child: OutlinedButton.icon(
                       icon: Container(
                         width: 40.sp,
                         height: 40.sp,
+                        color: Colors.white,
                         child: Icon(
                           Icons.payments_rounded,
                           size: 25.sp,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       label: Text(
@@ -163,11 +164,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         style: TextStyle(
                             fontFamily: usedFont,
                             fontSize: 13.sp,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.black,
+                        primary: Colors.white,
+                        surfaceTintColor: brandColor,
+                        side: BorderSide(color: Colors.black),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20.2),
@@ -179,7 +182,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               Expanded(
                 child: Container(
                     padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-                    height: 10.h,
+                    height: 7.h,
                     child: OutlinedButton.icon(
                       icon: CartIcon(
                         key: ValueKey("CartIconKey"),

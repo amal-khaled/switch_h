@@ -238,13 +238,14 @@ class _HomeScreenState extends State<HomeScreen> {
           key: homeScaffoldKey,
           backgroundColor: Colors.white,
           drawer: SizedBox(
-           height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width * 0.65,
             child: Drawer(
               // Add a ListView to the drawer. This ensures the user can scroll
               // through the options in the drawer if there isn't enough vertical
               // space to fit everything.
               child: Container(
-                color: brandColor,
+                color: Colors.white,
                 child: ListView(
                   // Important: Remove any padding from the ListView.
                   padding: EdgeInsets.zero,
@@ -262,14 +263,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             scale: 5,
                             colorFilter:
                                 ColorFilter.mode(Colors.red, BlendMode.dst)),
-                        color: brandColor,
+                        color: Colors.white,
                       ),
                     ),
                     Boxes.getUserDataBox().get("userLoginStatus") == "2"
                         ? ListTile(
+                            minVerticalPadding: 2,
+                            selected: true,
+                            enabled: true,
+                            selectedColor: titleColor.withOpacity(0.7),
                             leading: Icon(
                               Icons.logout,
-                              color: Colors.white,
+                              color: titleColor,
                             ),
                             title: Text(
                               AppLocalizations.of(context).translate("logout"),
@@ -277,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontFamily: usedFont,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.white),
+                                  color: Colors.black),
                             ),
                             onTap: () {
                               clearUserDate();
@@ -293,9 +298,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: CircularProgressIndicator(),
                               )
                             : ListTile(
+                                minVerticalPadding: 2,
+                                focusColor: titleColor.withOpacity(0.7),
+                                selectedTileColor: titleColor.withOpacity(0.7),
+                                selectedColor: titleColor.withOpacity(0.7),
                                 leading: Icon(
                                   Icons.person,
-                                  color: Colors.white,
+                                  color: titleColor,
                                 ),
                                 title: Text(
                                   AppLocalizations.of(context)
@@ -304,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontFamily: usedFont,
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w400,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                 ),
                                 onTap: () {
@@ -316,9 +325,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                     Divider(),
                     ListTile(
+                      minVerticalPadding: 2,
+                      focusColor: titleColor.withOpacity(0.7),
+                      selectedTileColor: titleColor.withOpacity(0.7),
+                      selectedColor: titleColor.withOpacity(0.7),
                       leading: Icon(
                         Icons.info_outline,
-                        color: Colors.white,
+                        color: titleColor,
                       ),
                       title: Text(
                         AppLocalizations.of(context)
@@ -327,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontFamily: usedFont,
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       onTap: () {
@@ -339,9 +352,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Divider(),
                     ListTile(
+                      minVerticalPadding: 2,
+                      focusColor: titleColor.withOpacity(0.7),
+                      selectedTileColor: titleColor.withOpacity(0.7),
+                      selectedColor: titleColor.withOpacity(0.7),
                       leading: Icon(
                         Icons.category,
-                        color: Colors.white,
+                        color: titleColor,
                       ),
                       title: Text(
                         AppLocalizations.of(context).translate("categories"),
@@ -349,7 +366,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontFamily: usedFont,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       onTap: () {
                         Navigator.push(
@@ -360,9 +377,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Divider(),
                     ListTile(
+                      minVerticalPadding: 2,
+                      focusColor: titleColor.withOpacity(0.7),
+                      selectedTileColor: titleColor.withOpacity(0.7),
+                      selectedColor: titleColor.withOpacity(0.7),
                       leading: Icon(
                         Icons.branding_watermark,
-                        color: Colors.white,
+                        color: titleColor,
                       ),
                       title: Text(
                         AppLocalizations.of(context).translate("brands"),
@@ -370,7 +391,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontFamily: usedFont,
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       onTap: () {
@@ -382,9 +403,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Divider(),
                     ListTile(
+                      minVerticalPadding: 2,
+                      focusColor: titleColor.withOpacity(0.7),
+                      selectedTileColor: titleColor.withOpacity(0.7),
+                      selectedColor: titleColor.withOpacity(0.7),
                       leading: Icon(
                         Icons.location_pin,
-                        color: Colors.white,
+                        color: titleColor,
                       ),
                       title: Text(
                         AppLocalizations.of(context).translate("address"),
@@ -392,7 +417,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontFamily: usedFont,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       onTap: () {
                         Navigator.push(
@@ -403,9 +428,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Divider(),
                     ListTile(
+                      minVerticalPadding: 2,
+                      focusColor: titleColor.withOpacity(0.7),
+                      selectedTileColor: titleColor.withOpacity(0.7),
+                      selectedColor: titleColor.withOpacity(0.7),
                       leading: Icon(
                         Icons.delivery_dining,
-                        color: Colors.white,
+                        color: titleColor,
                       ),
                       title: Text(
                         AppLocalizations.of(context).translate("myOrders"),
@@ -413,7 +442,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontFamily: usedFont,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       onTap: () {
                         Navigator.push(context,
@@ -422,9 +451,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Divider(),
                     ListTile(
+                      minVerticalPadding: 2,
+                      focusColor: titleColor.withOpacity(0.7),
+                      selectedTileColor: titleColor.withOpacity(0.7),
+                      selectedColor: titleColor.withOpacity(0.7),
                       leading: Icon(
                         Icons.settings,
-                        color: Colors.white,
+                        color: titleColor,
                       ),
                       title: Text(
                         AppLocalizations.of(context).translate("settings"),
@@ -432,7 +465,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontFamily: usedFont,
                             fontWeight: FontWeight.w400,
                             fontSize: 12.sp,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       onTap: () {
                         Navigator.push(
@@ -456,6 +489,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ConnectionState.done &&
                               snapshot.hasData) {
                             return ListTile(
+                                minVerticalPadding: 2,
+                                focusColor: titleColor.withOpacity(0.7),
+                                selectedTileColor: titleColor.withOpacity(0.7),
+                                selectedColor: titleColor.withOpacity(0.7),
                                 title: Text(
                                   AppLocalizations.of(context)
                                       .translate("share"),
@@ -463,11 +500,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontFamily: usedFont,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12.sp,
-                                      color: Colors.white),
+                                      color: Colors.black),
                                 ),
                                 leading: Icon(
                                   Icons.share,
-                                  color: Colors.white,
+                                  color: titleColor,
                                 ),
                                 onTap: () {
                                   share(
@@ -486,9 +523,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         }),
                     Divider(),
                     ListTile(
+                      minVerticalPadding: 2,
+                      focusColor: titleColor.withOpacity(0.7),
+                      selectedTileColor: titleColor.withOpacity(0.7),
+                      selectedColor: titleColor.withOpacity(0.7),
                       leading: Icon(
                         Icons.contact_phone,
-                        color: Colors.white,
+                        color: titleColor,
                       ),
                       title: Text(
                         AppLocalizations.of(context).translate("contactUs"),
@@ -496,7 +537,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontFamily: usedFont,
                             fontWeight: FontWeight.w400,
                             fontSize: 12.sp,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                       onTap: () {
                         showDialog();
