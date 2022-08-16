@@ -91,8 +91,13 @@ class MyApp extends StatelessWidget {
       child: Consumer<AppLanguage>(builder: (context, model, child) {
         return Sizer(builder: (context, orientation, deviceType) {
           return MaterialApp(
-            theme: ThemeData(unselectedWidgetColor: Colors.white),
+            theme: ThemeData(
+              unselectedWidgetColor: Colors.white,
+              scaffoldBackgroundColor: Colors.white,
+              backgroundColor: Colors.white,
+            ),
             debugShowCheckedModeBanner: false,
+
             locale: model.appLocale,
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,

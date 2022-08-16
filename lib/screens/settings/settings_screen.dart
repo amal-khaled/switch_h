@@ -2,14 +2,12 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:new_version/new_version.dart';
 import 'package:provider/provider.dart';
 import 'package:sweet/constants.dart';
 import 'package:sweet/screens/settings/terms_and_conditions.dart';
 import '../../providers/app_localizations.dart';
 import '../../providers/home_provider.dart';
 import 'languages_screen.dart';
-import 'dart:async';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
