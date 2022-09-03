@@ -104,10 +104,31 @@ class _CartState extends State<Cart> {
       appBar: AppBar(
         shape: shapeForAppBars(),
         elevation: 0.0,
+        centerTitle: false,
         iconTheme: IconThemeData(color: brandColor),
-        title: Text(AppLocalizations.of(context).translate("cart"),
-            style: TextStyle(
-                fontFamily: usedFont, fontSize: 17.sp, color: brandColor)),
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(AppLocalizations.of(context).translate("cart"),
+                style: TextStyle(
+                    fontFamily: usedFont, fontSize: 17.sp, color: brandColor)),
+            ValueListenableBuilder(
+              valueListenable: Boxes.getUserDataBox().listenable(),
+              builder: (context, Box<String> userData, _) {
+                final value = userData.get("totalInCart") ?? "0.0";
+                return Text(
+                  "${AppLocalizations.of(context).translate("totalPrice")} : ${"${double.parse(value).toStringAsFixed(2)} ${AppLocalizations.of(context).translate("kd")}"}",
+                  style: TextStyle(
+                    fontFamily: usedFont,
+                    fontSize: 13.sp,
+                    color: brandColor,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
         backgroundColor: Colors.white,
       ),
       body: ValueListenableBuilder(
@@ -178,7 +199,7 @@ class _CartState extends State<Cart> {
                                         children: <Widget>[
                                           Container(
                                             width: 35.w,
-                                            height: 16.h,
+                                            height: 8.h,
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
@@ -187,7 +208,7 @@ class _CartState extends State<Cart> {
                                                         .getLocalCartItemsObjectBox()
                                                     .get(productsIDs[index])
                                                     .productImageURL),
-                                                fit: BoxFit.fill,
+                                                fit: BoxFit.fitHeight,
                                               ),
                                             ),
                                             margin: EdgeInsets.all(2.0),
@@ -498,6 +519,7 @@ class _CartState extends State<Cart> {
   Widget discontCoupon() {
     return Container(
       margin: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.01,
           horizontal: MediaQuery.of(context).size.width * 0.02),
       decoration: BoxDecoration(
         border: Border.all(
@@ -506,7 +528,7 @@ class _CartState extends State<Cart> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(2.w),
       ),
-      height: 10.h,
+      height: 8.h,
       child: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),

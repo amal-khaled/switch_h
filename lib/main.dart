@@ -599,9 +599,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                       width: 100.w, height: 28.h, child: HomeSliderListView()),
-                  SizedBox(height: 3.h),
+                  SizedBox(height: 3.2.h),
                   BrandsInHList(),
-                  SizedBox(height: 3.h),
+                  SizedBox(height: 1.h),
                   HomeScreenCategories(),
                 ],
               ),

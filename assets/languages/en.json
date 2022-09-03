@@ -203,5 +203,9 @@
   "required_apartment": "apartment is required",
   "invalid_phone":"phone number is invalid",
   "closea": "Closea",
-  "address":"My Addresses"
+  "address":"My Addresses",
+  "add_address":"Add Address",
+  "visitor":"Login as Visitor",
+  "my_address":"My Addresses",
+  "select_address":"select from your previouse addresses"
 }

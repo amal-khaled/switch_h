@@ -169,7 +169,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white,
-                        surfaceTintColor: brandColor,
+                        onSurface: brandColor,
+                        // surfaceTintColor: brandColor,
                         side: BorderSide(color: Colors.black),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(

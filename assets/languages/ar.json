@@ -204,5 +204,9 @@
     "invalid_phone":"رقم الهاتف غير صحيح",
     "required_apartment": "رقم المنزل مطلوب",
     "closea": "إغلاق",
-    "address":"عناويني"
+    "address":"عناويني",
+    "add_address":"اضافة عنوان الشحن",
+    "visitor":"تسجيل الدخول كزائر",
+    "my_address":"عناويني",
+    "select_address":"اختر عنوان سابق"
 }

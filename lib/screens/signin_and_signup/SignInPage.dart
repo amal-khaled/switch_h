@@ -154,6 +154,9 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     onTap: () {
                       Navigator.pop(context);
+                      Boxes.getLocalCartItemsBox();
+                      Boxes.getUserDataBox();
+                      Boxes.getLocalCartItemsObjectBox();
                     },
                   ),
                 ),
@@ -169,7 +172,7 @@ class _SignInPageState extends State<SignInPage> {
                   height: 10.h,
                 ),
                 Flexible(
-                  flex: 8,
+                  flex: 10,
                   child: Container(
                     //padding: EdgeInsets.only(left: 20, right: 20, top: 35, bottom: 30),
                     width: 100.w,
@@ -332,7 +335,7 @@ class _SignInPageState extends State<SignInPage> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 15,
+                                      height: 3.h,
                                     ),
                                     _isLoading
                                         ? Center(
@@ -373,49 +376,55 @@ class _SignInPageState extends State<SignInPage> {
                                                 ),
                                                 onPressed: () => {loginNow()}),
                                           ),
-                                    SizedBox(
-                                      height: 2,
-                                    ),
                                   ],
                                 ),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        child: Text(
-                                          AppLocalizations.of(context)
-                                              .translate("don'tHaveAccount"),
-                                          style: TextStyle(
-                                              fontFamily: usedFont,
-                                              fontSize: 14,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () => {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SignUpPage()))
-                                        },
-                                        child: Container(
-                                          child: Text(
-                                            AppLocalizations.of(context)
-                                                .translate("signUp"),
-                                            style: TextStyle(
-                                                fontFamily: usedFont,
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                InkWell(
+                                  onTap: () => Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()),
                                   ),
+                                  child: Center(
+                                    child: Text(
+                                      AppLocalizations.of(context)
+                                          .translate("visitor"),
+                                      style: TextStyle(
+                                          fontFamily: usedFont,
+                                          fontSize: 14.sp,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      AppLocalizations.of(context)
+                                          .translate("don'tHaveAccount"),
+                                      style: TextStyle(
+                                          fontFamily: usedFont,
+                                          fontSize: 14,
+                                          color: Colors.white),
+                                    ),
+                                    InkWell(
+                                      onTap: () => {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignUpPage()))
+                                      },
+                                      child: Text(
+                                        AppLocalizations.of(context)
+                                            .translate("signUp"),
+                                        style: TextStyle(
+                                            fontFamily: usedFont,
+                                            fontSize: 14,
+                                            color: Colors.black),
+                                      ),
+                                    ),
+                                  ],
                                 )
                               ],
                             ),
@@ -470,101 +479,3 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
-
-/*class FacebookGoogleLogin extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(top: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  gradient: new LinearGradient(
-                      colors: [
-                        Colors.black12,
-                        Colors.black54,
-                      ],
-                      begin: const FractionalOffset(0.0, 0.0),
-                      end: const FractionalOffset(1.0, 1.0),
-                      stops: [0.0, 1.0],
-                      tileMode: TileMode.clamp),
-                ),
-                width: 100.0,
-                height: 1.0,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Text(
-                  "Or",
-                  style: TextStyle(
-                      color: Color(0xFF2c2b2b),
-                      fontSize: 16.0,
-                      fontFamily: "WorkSansMedium"),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  gradient: new LinearGradient(
-                      colors: [
-                        Colors.black54,
-                        Colors.black12,
-                      ],
-                      begin: const FractionalOffset(0.0, 0.0),
-                      end: const FractionalOffset(1.0, 1.0),
-                      stops: [0.0, 1.0],
-                      tileMode: TileMode.clamp),
-                ),
-                width: 100.0,
-                height: 1.0,
-              ),
-            ],
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 10.0, right: 40.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  padding: const EdgeInsets.all(15.0),
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xff416ff7),
-                  ),
-                  child: Icon(
-                    FontAwesomeIcons.facebookF,
-                    color: Color(0xFFFFFFFF),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10.0),
-              child: GestureDetector(
-                onTap: () => {},
-                child: Container(
-                  padding: const EdgeInsets.all(15.0),
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFFf7418c),
-                  ),
-                  child: new Icon(
-                    FontAwesomeIcons.google,
-                    color: Color(0xFFFFFFFF),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    ));
-  }
-}*/

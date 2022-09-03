@@ -650,23 +650,34 @@ class _PaymentPageState extends State<PaymentPage> {
                                     padding: EdgeInsets.all(0),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10.0),
-                                      color: Colors.white,
+                                      color: Colors.transparent,
                                       //border: Border.all(color: Colors.white, width: 1.0),
                                     ),
                                     height: 8.h,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      child: Image(
-                                        image: myPaymentMethods[index]
-                                                    .paymentMethodId ==
-                                                0
-                                            ? AssetImage(
-                                                "${myPaymentMethods[index].imageUrl}",
-                                              )
-                                            : NetworkImage(
-                                                "${myPaymentMethods[index].imageUrl}",
-                                              ),
-                                        width: 18.w,
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.2,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                      child: Center(
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: Image(
+                                            fit: BoxFit.contain,
+                                            image: myPaymentMethods[index]
+                                                        .paymentMethodId ==
+                                                    0
+                                                ? AssetImage(
+                                                    "${myPaymentMethods[index].imageUrl}",
+                                                  )
+                                                : NetworkImage(
+                                                    "${myPaymentMethods[index].imageUrl}",
+                                                  ),
+                                            width: 18.w,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
